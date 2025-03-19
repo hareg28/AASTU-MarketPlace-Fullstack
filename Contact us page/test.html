@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Contact us page of the ASTU marketplace"
+    />
+    <meta name="author" content="Team 1 Section B AASTU students" />
+    <meta name="keywords" content="AASTU, Marketplace, Buy, Sell, Contact Us" />
+    <meta name="robots" content="index, follow" />
+    <title>Contact Us</title>
+    <link rel="icon" href="/Assets/favicon.png" type="image/x-icon" />
+    <link rel="stylesheet" href="/Styles/Common Header and footer/style.css" />
+    <link rel="stylesheet" href="/Contact us page/Contact us Style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&family=Sora:wght@100..800&display=swap"
+      rel="stylesheet"
+    />
+    <script type="module" src="/JavaScript/Script1.js" defer></script>
+  </head>
+
+  <body>
+    <!-- Header Section -->
+    <header class="heading">
+      <div class="heading-text">Welcome to My Website</div>
+    </header>
+    <nav>
+      <div class="heading_1">MyLogo</div>
+      <ul class="navigation">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <div class="search-container">
+        <input type="text" class="search-input" placeholder="Search..." />
+        <button class="search-btn">
+          <svg
+            class="search-icon"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M23.384 21.619l-6.609-6.609c1.166-1.636 1.774-3.68 1.774-5.783C18.549 4.8 14.949 1.2 10.275 1.2 5.6 1.2 2 4.8 2 9.475c0 4.675 3.6 8.275 8.275 8.275 2.103 0 4.146-.608 5.782-1.774l6.609 6.609a1.2 1.2 0 101.718-1.718zM4.4 9.475c0-3.247 2.627-5.875 5.875-5.875 3.247 0 5.875 2.628 5.875 5.875s-2.628 5.875-5.875 5.875c-3.248 0-5.875-2.628-5.875-5.875z"
+            ></path>
+          </svg>
+        </button>
+      </div>
+      <div class="btns">
+        <a href="#"><img src="user-icon.png" alt="User Icon" /></a>
+      </div>
+    </nav>
+
+    <div class="content" id="content">
+      <!-- Page content goes here -->
+    </div>
+
+    <!-- Footer Section -->
+    <footer>
+      <div>
+        <h2>Contact Us</h2>
+        <p>1234 Street Name</p>
+        <p>City, Country</p>
+      </div>
+      <div>
+        <h2>Quick Links</h2>
+        <a href="#">Privacy Policy</a><br />
+        <a href="#">Terms of Service</a>
+      </div>
+      <div>
+        <h2>Follow Us</h2>
+        <div class="contacts">
+          <img src="facebook-icon.png" alt="Facebook" />
+          <img src="twitter-icon.png" alt="Twitter" />
+          <img src="instagram-icon.png" alt="Instagram" />
+        </div>
+      </div>
+      <div>
+        <p class="CurrentYear">
+          &copy; <span id="current-year"></span> My Website. All rights
+          reserved.
+        </p>
+      </div>
+    </footer>
+
+    <button
+      id="scroll-to-top"
+      style="
+        display: none;
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        padding: 10px;
+        background: #004f7d;
+        color: white;
+        border: none;
+        border-radius: 50%;
+        cursor: pointer;
+      "
+    >
+      ↑
+    </button>
+
+    <script>
+      // Dynamically update the year in the footer
+      const currentYearElement = document.getElementById("current-year");
+      currentYearElement.textContent = new Date().getFullYear();
+
+      // Search bar functionality
+      const searchButton = document.querySelector(".search-btn");
+      const searchInput = document.querySelector(".search-input");
+
+      searchButton.addEventListener("click", () => {
+        const query = searchInput.value.trim();
+        if (query) {
+          alert(`You searched for: ${query}`);
+          searchInput.value = ""; // Clear the input
+        } else {
+          alert("Please enter a search query!");
+        }
+      });
+
+      // Scroll-to-top button functionality
+      const scrollToTopButton = document.getElementById("scroll-to-top");
+
+      window.addEventListener("scroll", () => {
+        if (window.scrollY > 200) {
+          scrollToTopButton.style.display = "block";
+        } else {
+          scrollToTopButton.style.display = "none";
+        }
+      });
+
+      scrollToTopButton.addEventListener("click", () => {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      });
+    </script>
+  </body>
+</html>

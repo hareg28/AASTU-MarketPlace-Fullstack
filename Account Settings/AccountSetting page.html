@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Account Settings</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Contact us page of the ASTU marketplace"
+    />
+    <meta name="author" content="Team 1 Section B AASTU students" />
+    <meta name="robots" content="index, follow" />
+    <link rel="icon" href="/Assets/favicon.png" type="image/x-icon" />
+    <link rel="stylesheet" href="/Contact us page/style.css" />
+    <link rel="stylesheet" href="/Styles/Common Header and footer/style.css" />
+    <link rel="stylesheet" href="/Account Settings/AccountSetting Style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&family=Sora:wght@100..800&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <script type="module" src="/JavaScript/Script1.js" defer></script>
+  </head>
+
+  <body>
+    <header>
+      <div class="heading">
+        <p class="heading-text">
+          Find every kind of product or sell what you’ve got.
+          <a href="#">Shop Now</a> OR <a href="#">Sell Your Product</a>
+        </p>
+      </div>
+      <nav>
+        <h1 class="heading_1">AASTU Marketplace</h1>
+        <ul class="navigation">
+          <li><a href="/Home/Home.html">Home</a></li>
+          <li><a href="/Contact us page/Contact us.html">Contact</a></li>
+          <li><a href="/About Page/About_us.html">About</a></li>
+          <li><a href="/Sign up page/signup.html">Sign Up</a></li>
+        </ul>
+        <div class="search-container">
+          <input
+            type="text"
+            class="search-input"
+            placeholder="What are you looking for?"
+          />
+          <button class="search-btn">
+            <img
+              src="/Assets/Search button.png"
+              alt="Search Icon"
+              class="search-icon"
+            />
+          </button>
+        </div>
+        <div class="btns">
+          <a href="/WishList Page/wishlist.html"
+            ><img src="/Assets/Wishlist.png" alt="Go to Wishlist"
+          /></a>
+          <a href="/Cart Page/index.html"
+            ><img src="/Assets/Cart1.png" alt="View Cart"
+          /></a>
+          <a href="/Account Settings/AccountSetting page.html"
+            ><img src="/Assets/user.png" alt="Account Settings"
+          /></a>
+        </div>
+      </nav>
+      <div class="bottom-line"></div>
+    </header>
+    <div class="homeText">
+      <span>Home /</span>
+      <h4 style="display: inline">My Account</h4>
+    </div>
+    <div class="content-container">
+      <section class="section-1">
+        <ul>
+          <h3>Manage My Account</h3>
+          <li><a href="#">My Profile</a></li>
+          <li><a href="#">Address Book</a></li>
+          <li><a href="#">My Payment Options</a></li>
+        </ul>
+        <ul>
+          <h3>My Orders</h3>
+          <li><a href="#">My Connections</a></li>
+          <h3>My wishlist</h3>
+        </ul>
+      </section>
+      <section class="section-2">
+        <form>
+          <span>
+            <label>
+              <h2 class="Edit">Edit your profile</h2>
+              <br />
+              First Name
+              <br />
+              <input
+                required
+                class="Name"
+                type="text"
+                name="fname"
+                placeholder="Your Name *"
+                required
+              />
+            </label>
+            <label class="lastName">
+              Last Name
+              <br />
+              <input
+                required
+                class="Name"
+                type="text"
+                name="lname"
+                placeholder="Your Last Name *"
+                required
+              />
+            </label>
+            <label>
+              Email
+              <br />
+              <input
+                class="Email"
+                type="email"
+                name="EmailAddress"
+                placeholder="Your Email *"
+                required
+                pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"
+                title="Please enter a valid email address (e.g., example@domain.com)"
+              />
+            </label>
+            <label class="Address">
+              Address
+              <br />
+              <input
+                class="Email"
+                type="text"
+                name="Address"
+                placeholder="Koye, AASTU, Addis Abeba"
+                required
+                pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"
+                title="Please enter a valid email address (e.g., example@domain.com)"
+              />
+            </label>
+          </span>
+          <div class="password-changes">
+            <div class="form-group">
+              <h4>Password Changes</h4>
+              <input
+                type="password"
+                id="current-password"
+                name="current-password"
+                placeholder="Enter your current password"
+                required
+              />
+            </div>
+
+            <!-- New Password -->
+
+            <div class="form-group">
+              <input
+                type="password"
+                id="new-password"
+                name="new-password"
+                placeholder="Enter your new password"
+                required
+                pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@#$%])[A-Za-z\d@#$%]{8,}"
+                title="Password must be at least 8 characters long, contain at least one uppercase letter, one lowercase letter, one digit, and one special symbol (@, #, $, %)."
+              />
+            </div>
+
+            <!-- Confirm New Password -->
+            <div class="form-group">
+              <input
+                type="password"
+                id="confirm-password"
+                name="confirm-password"
+                placeholder="Re-enter your new password"
+                required
+              />
+            </div>
+          </div>
+          <div class="buttons">
+            <button
+              class="cancel-btn"
+              style="background-color: white; border: none"
+              type="reset"
+            >
+              Cancel
+            </button>
+            <div>
+              <button class="send-btn" type="submit">Send Message</button>
+            </div>
+          </div>
+        </form>
+      </section>
+    </div>
+    <footer>
+      <div class="support-container">
+        <h2>Support</h2>
+        <h3>
+          Addis Ababa, Koyefeche,<br />Addis Ababa Science<br />
+          and Technology University
+        </h3>
+        <h3>AASTUMarketPlace@gmail.com</h3>
+        <h3>+251 934 556 789</h3>
+      </div>
+      <div class="account-container">
+        <h2>Account</h2>
+        <h3>
+          <a href="/Log in Page/login.html">Login</a> /
+          <a href="/Sign up page/signup.html">Register</a>
+        </h3>
+        <h3><a href="/Cart Page/index.html">Cart</a></h3>
+        <h3><a href="/WishList Page/wishlist.html">Wishlist</a></h3>
+      </div>
+      <div class="quick-link">
+        <h2>Quick Link</h2>
+        <h3><a href="/About Page/About_us.html">About us</a></h3>
+        <h3><a href="/Contact us page/Contact us.html">Contact</a></h3>
+        <h3><a href="/Sign up page/signup.html">Sale Product</a></h3>
+      </div>
+      <div class="download-img">
+        <h2>Download App</h2>
+        <h3>Save $3 with App New User Only</h3>
+        <a href="#"
+          ><img
+            class="playstore"
+            height="65px"
+            src="/Assets/Frame 719.png"
+            alt="App download link"
+        /></a>
+        <div class="contacts">
+          <a href="https://facebook.com" aria-label="Visit our Facebook page"
+            ><img src="/Assets/Icon-Facebook.png" alt="Facebook Icon"
+          /></a>
+          <a href="https://twitter.com" aria-label="Visit our Twitter page"
+            ><img src="/Assets/Icon-X.png" alt="Twitter Icon"
+          /></a>
+          <a href="https://instagram.com" aria-label="Visit our Instagram page"
+            ><img src="/Assets/icon-instagram.png" alt="Instagram Icon"
+          /></a>
+          <a href="https://linkedin.com" aria-label="Visit our LinkedIn page"
+            ><img src="/Assets/Icon-Linkedin.png" alt="LinkedIn Icon"
+          /></a>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

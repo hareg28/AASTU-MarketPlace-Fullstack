@@ -1,0 +1,1 @@
+hey ppl use these styles for the header and footer of our website like them to your pages and add the contents of your pages right away
