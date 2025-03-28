@@ -5,11 +5,7 @@ import searchIcon from "../Assets/Search button.png";
 import wishlistIcon from "../Assets/Wishlist.png";
 import cartIcon from "../Assets/Cart1.png";
 import userIcon from "../Assets/user.png";
-import frameIcon from "../Assets/Frame 719.png";
-import facebookIcon from "../Assets/Icon-Facebook.png";
-import twitterIcon from "../Assets/Icon-X.png";
-import instagramIcon from "../Assets/icon-instagram.png";
-import linkedinIcon from "../Assets/Icon-Linkedin.png";
+import { Link } from "react-router-dom";
 
 const Nav = () => {
   const [isDropdownVisible, setIsDropdownVisible] = useState(false);
@@ -21,19 +17,11 @@ const Nav = () => {
   const handleMouseLeave = () => {
     setIsDropdownVisible(false);
   };
-
-  const date = new Date();
-  const currentYear = date.getFullYear();
-
   return (
     <div>
       <title>Header/Footer</title>
       <meta charSet="UTF-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <meta
-        name="description"
-        content="Contact us page of the ASTU marketplace"
-      />
       <meta name="author" content="Team 1 Section B AASTU students" />
       <meta name="robots" content="index, follow" />
       <link rel="icon" href="/Assets/favicon.png" type="image/x-icon" />
@@ -61,7 +49,7 @@ const Nav = () => {
               <a href="/Home/Home.html">Home</a>
             </li>
             <li>
-              <a href="/Contact us page/Contact us.html">Contact</a>
+              <Link to="/contacus">Contact Us</Link>
             </li>
             <li>
               <a href="/About Page/About_us.html">About</a>
@@ -107,78 +95,6 @@ const Nav = () => {
         <div className="bottom-line" />
       </header>
       <div className="a" />
-      <footer>
-        <div className="support-container">
-          <h2>Support</h2>
-          <h3>
-            Addis Ababa, Koyefeche,
-            <br />
-            Addis Ababa Science
-            <br />
-            and Technology University
-          </h3>
-          <h3>AASTUMarketPlace@gmail.com</h3>
-          <h3>+251 934 556 789</h3>
-        </div>
-        <div className="account-container">
-          <h2>Account</h2>
-          <h3>
-            <a href="/Log in Page/login.html">Login</a> /
-            <a href="/Sign up page/signup.html">Register</a>
-          </h3>
-          <h3>
-            <a href="/Cart Page/index.html">Cart</a>
-          </h3>
-          <h3>
-            <a href="/WishList Page/wishlist.html">Wishlist</a>
-          </h3>
-        </div>
-        <div className="quick-link">
-          <h2>Quick Link</h2>
-          <h3>
-            <a href="/About Page/About_us.html">About us</a>
-          </h3>
-          <h3>
-            <a href="/Contact us page/Contact us.html">Contact</a>
-          </h3>
-          <h3>
-            <a href="/Sign up page/signup.html">Sale Product</a>
-          </h3>
-        </div>
-        <div className="download-img">
-          <h2>Download App</h2>
-          <h3>Save $3 with App New User Only</h3>
-          <a href="#">
-            <img
-              className="playstore"
-              height="65px"
-              src={frameIcon}
-              alt="App download link"
-            />
-          </a>
-          <div className="contacts">
-            <a href="https://facebook.com" aria-label="Visit our Facebook page">
-              <img src={facebookIcon} alt="Facebook Icon" />
-            </a>
-            <a href="https://twitter.com" aria-label="Visit our Twitter page">
-              <img src={twitterIcon} alt="Twitter Icon" />
-            </a>
-            <a
-              href="https://instagram.com"
-              aria-label="Visit our Instagram page"
-            >
-              <img src={instagramIcon} alt="Instagram Icon" />
-            </a>
-            <a href="https://linkedin.com" aria-label="Visit our LinkedIn page">
-              <img src={linkedinIcon} alt="LinkedIn Icon" />
-            </a>
-          </div>
-        </div>
-        <pre>
-          <span>&copy;</span> {currentYear} AASTU Marketplace. All rights
-          reserved.
-        </pre>
-      </footer>
     </div>
   );
 };
