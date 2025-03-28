@@ -1,17 +1,15 @@
 import React from "react";
 import "../CSS/DropdownMenu-style.css"; // Ensure this file exists and contains styles for the dropdown
+import { Link } from "react-router-dom";
 
 const DropdownMenu = () => {
   return (
     <div className="dropdown-menu">
       <div className="menu-item">
         <i className="fas fa-user"></i>
-        <a
-          className="menu-text"
-          href="/Account Settings/AccountSetting page.html"
-        >
+        <Link to="/accountsettings" className="menu-text">
           Manage My Account
-        </a>
+        </Link>
       </div>
       <div className="menu-item">
         <i className="fas fa-shopping-bag"></i>
