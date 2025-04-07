@@ -73,7 +73,7 @@ const Nav = () => {
               <img src={wishlistIcon} alt="Go to Wishlist" />
             </a>
             <a href="/Cart Page/index.html">
-              <img src={cartIcon} alt="View Cart" />
+              <Link to ="/cart"> <img src={cartIcon} alt="View Cart" /></Link>
             </a>
             <div
               className="dropdown-container"
