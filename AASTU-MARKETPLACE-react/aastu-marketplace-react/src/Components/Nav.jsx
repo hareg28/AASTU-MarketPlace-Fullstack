@@ -69,9 +69,9 @@ const Nav = () => {
             </button>
           </div>
           <div className="btns">
-            <a href="/WishList Page/wishlist.html">
+            <Link to="/wishlist">
               <img src={wishlistIcon} alt="Go to Wishlist" />
-            </a>
+            </Link>
             <a href="/Cart Page/index.html">
               <Link to="/cart">
                 {" "}
