@@ -42,7 +42,7 @@ const Contactus = () => {
       </div>
       <div className="page-container">
         <section className="section-1">
-          <form action>
+          <form action="#">
             <div className="contact-item">
               <img className="a" src={phoneIcon} alt="Call to Us" />
               <span className="a">Call to Us</span>
@@ -52,7 +52,7 @@ const Contactus = () => {
             <span>We are available 24/7, 7 days a week</span>
             <br />
             <br />
-            <h4>Phone:+251934556789</h4>
+            <h4>Phone: +251934556789</h4>
             <br />
             <div className="bottom-line2" />
             <br />
@@ -68,14 +68,14 @@ const Contactus = () => {
             <br />
             <h4>
               Emails:
-              <a href="customer@AASTUMarketPlace.com">
-                AASTUMarketPlace@gmail.com
+              <a href="mailto:customer@AASTUMarketPlace.com">
+                customer@AASTUMarketPlace.com
               </a>
             </h4>
             <h4>
               Emails:
-              <a href="support@AASTUMarketPlace.com">
-                AASTUMarketPlace@gmail.com
+              <a href="mailto:support@AASTUMarketPlace.com">
+                support@AASTUMarketPlace.com
               </a>
             </h4>
             <h4>

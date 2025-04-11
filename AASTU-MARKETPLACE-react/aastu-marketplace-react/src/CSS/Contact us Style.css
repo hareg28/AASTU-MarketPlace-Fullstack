@@ -8,7 +8,7 @@
   gap: 100px;
   grid-template-columns: 1.5fr 3fr;
 }
-.section-1 {
+.contact-us-section-1 {
   grid-column: 1;
   align-items: center;
   height: max-content;
@@ -19,23 +19,23 @@
   font-style: normal;
   font-size: smaller;
 }
-.section-1 .contact-item {
+.contact-us-section-1 .contact-item {
   display: flex;
   align-items: center;
   gap: 10px;
   font-weight: 400;
 }
 
-.section-1 img {
+.contact-us-section-1 img {
   width: 30px;
   height: 30px;
 }
 
-.section-1 span {
+.contact-us-section-1 span {
   font-weight: 400;
   font-size: 13px;
 }
-.homeText {
+.contact-us-homeText {
   margin-top: 65px;
   margin-bottom: 50px;
   margin-left: 5%;
@@ -49,17 +49,17 @@
   height: 2px;
   background-color: #b9b9b9;
 }
-.section-1 h4 a {
+.contact-us-section-1 h4 a {
   text-decoration: none;
   color: #000000;
   transition: color 0.3s;
 }
 
-.section-1 h4 a:hover {
+.contact-us-section-1 h4 a:hover {
   color: #00a9e3;
 }
 /* Styles for Section 2 */
-.section-2 {
+.section-contact-us-section-2 {
   display: grid;
   grid-template-rows: 0.5fr 3fr;
   grid-column: 2;
@@ -69,7 +69,7 @@
   gap: 25px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
-.section-2 span {
+.contact-us-section-2 span {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-row: 1;
@@ -81,7 +81,7 @@
   font-weight: 300;
   border-radius: 4px;
 }
-.section-2 span input {
+.contact-us-section-2 span input {
   background-color: rgba(0, 0, 0, 0.05);
   padding: 10px;
   font-family: "Poppins", serif;
@@ -91,7 +91,7 @@
   font-weight: 300;
   border-radius: 4px;
 }
-.section-2 textarea {
+.contact-us-section-2 textarea {
   background-color: rgba(0, 0, 0, 0.05);
   padding: 10px;
   border: none;
@@ -102,13 +102,13 @@
   font-weight: 300;
   border-radius: 4px;
 }
-.section-2 textarea {
+.contact-us-section-2 textarea {
   grid-row: 2;
 }
-.section-2 input {
+.contact-us-section-2 input {
   border: none;
 }
-.send-btn {
+.contact-us-send-btn{
   display: flex;
   justify-self: end;
   justify-content: center;
@@ -126,7 +126,7 @@
   border-radius: 4px;
   border: none;
 }
-.send-btn:hover {
+.contact-us-send-btn:hover {
   transform: scale(1.1);
   cursor: pointer;
 }
@@ -156,7 +156,7 @@ a[href="/Account Settings/AccountSetting page.html"] img:hover {
   .page-container {
     gap: 10px;
   }
-  .section-2 {
+  .contact-us-section-2 {
     width: 100%;
   }
 }
@@ -165,7 +165,7 @@ a[href="/Account Settings/AccountSetting page.html"] img:hover {
   .page-container {
     grid-template-columns: 1fr;
   }
-  .section-1 {
+  .contact-us-section-1 {
     grid-column: 1;
     align-items: center;
     height: max-content;
@@ -176,7 +176,7 @@ a[href="/Account Settings/AccountSetting page.html"] img:hover {
     font-style: normal;
     font-size: smaller;
   }
-  .section-2 {
+  .contact-us-section-2 {
     display: grid;
     grid-template-rows: 0.5fr 3fr;
     grid-column: 1;
@@ -191,7 +191,7 @@ a[href="/Account Settings/AccountSetting page.html"] img:hover {
   .page-container {
     grid-template-columns: 1fr;
   }
-  .section-1 {
+  .contact-us-section-1 {
     grid-column: 1;
     align-items: center;
     height: max-content;
@@ -203,7 +203,7 @@ a[href="/Account Settings/AccountSetting page.html"] img:hover {
     font-size: smaller;
     width: 100%;
   }
-  .section-2 {
+  .contact-us-section-2 {
     display: grid;
     grid-template-rows: 0.5fr 3fr;
     grid-column: 1;
@@ -214,7 +214,7 @@ a[href="/Account Settings/AccountSetting page.html"] img:hover {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     width: 100%;
   }
-  .section-2 span {
+  .contact-us-section-2 span {
     display: grid;
     grid-template-columns: 1fr;
     grid-row: 1;
