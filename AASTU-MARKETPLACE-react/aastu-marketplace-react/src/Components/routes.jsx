@@ -15,7 +15,7 @@ const routes = createBrowserRouter([
     element: <Layout />,
     children: [
       { path: "/contacus", element: <Contactus /> },
-      { path: "/home", element: <Home /> },
+      { path: "/", element: <Home /> },
       { path: "*", element: <Page404 /> },
       { path: "productdetails", element: <ProductDetails /> },
       { path: "checkout", element: <Checkout /> },

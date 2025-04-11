@@ -46,13 +46,13 @@ const Nav = () => {
           <h1 className="heading_1">AASTU Marketplace</h1>
           <ul className="navigation">
             <li>
-              <a href="/Home/Home.html">Home</a>
+              <Link to="/">Home</Link>
             </li>
             <li>
               <Link to="/contacus">Contact Us</Link>
             </li>
             <li>
-              <a href="/About Page/About_us.html">About</a>
+              <Link to="/about">About Us</Link>
             </li>
             <li>
               <a href="/Sign up page/signup.html">Sign Up</a>
@@ -73,7 +73,10 @@ const Nav = () => {
               <img src={wishlistIcon} alt="Go to Wishlist" />
             </a>
             <a href="/Cart Page/index.html">
-              <Link to ="/cart"> <img src={cartIcon} alt="View Cart" /></Link>
+              <Link to="/cart">
+                {" "}
+                <img src={cartIcon} alt="View Cart" />
+              </Link>
             </a>
             <div
               className="dropdown-container"
