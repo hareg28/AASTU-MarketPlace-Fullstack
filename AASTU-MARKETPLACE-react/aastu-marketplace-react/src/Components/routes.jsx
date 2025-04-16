@@ -9,6 +9,7 @@ import Checkout from "../Pages/Checkout";
 import Cart from "../Pages/Cart";
 import Wishlist from "../Pages/Wishlist";
 import About from "../Pages/About";
+import Profile from "../Pages/Profile";
 
 const routes = createBrowserRouter([
   {
@@ -22,10 +23,11 @@ const routes = createBrowserRouter([
       { path: "checkout", element: <Checkout /> },
       { path: "/wishlist", element: <Wishlist /> },
       { path: "/about", element: <About /> },
+      { path: "/profile", element: <Profile /> },
 
       { path: "cart", element: <Cart /> },
     ],
   },
 ]);
 export default routes;
-// 
+//

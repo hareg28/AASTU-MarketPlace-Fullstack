@@ -7,9 +7,11 @@ import ItemSales from "../Components/home/item";
 const Home = () => {
   return (
     <div className="home">
-      <Sidebar />
-      <div className="home-content">
+      <div className="home-upper">
+        <Sidebar />
         <Banner />
+      </div>
+      <div className="home-content">
         <ItemSales />
         <Banner />
         <ItemSales />

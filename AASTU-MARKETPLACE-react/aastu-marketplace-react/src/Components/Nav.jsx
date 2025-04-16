@@ -84,7 +84,7 @@ const Nav = () => {
               onMouseLeave={handleMouseLeave}
               style={{ position: "relative" }}
             >
-              <Link to="/accountsettings">
+              <Link to="/profile">
                 <img src={userIcon} alt="Account Settings" />
               </Link>
               {isDropdownVisible && (
