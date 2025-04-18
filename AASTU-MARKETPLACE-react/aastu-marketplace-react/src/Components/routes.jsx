@@ -3,6 +3,9 @@ import Layout from "./Layout";
 import Contactus from "../Pages/Contactus";
 import Page404 from "../Pages/Page404";
 import AccountSettings from "../Pages/AccountSettings";
+import Cart from "../Pages/Cart";
+import Checkout from "../Pages/Checkout"; 
+import ProductDetails from "../Pages/ProductDetails";
 
 const routes = createBrowserRouter([
   {
@@ -12,6 +15,9 @@ const routes = createBrowserRouter([
       { path: "contacus", element: <Contactus /> }, 
       { path: "accountsettings", element: <AccountSettings /> },
       { path: "*", element: <Page404 /> },
+      {path:"cart", element: <Cart />},
+      {path:"checkout", element: <Checkout />},
+      {path:"productdetails", element: <ProductDetails />},
     ],
   },
 ]);
