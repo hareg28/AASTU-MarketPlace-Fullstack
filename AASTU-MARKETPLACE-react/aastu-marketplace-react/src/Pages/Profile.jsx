@@ -11,7 +11,7 @@ export default function UserDashboard() {
       <div className="bottom">
         <InfoSettingsSection />
         <div className="items-container-pro">
-          <ItemSales count={8} />
+          <ItemSales />
         </div>
       </div>
     </div>

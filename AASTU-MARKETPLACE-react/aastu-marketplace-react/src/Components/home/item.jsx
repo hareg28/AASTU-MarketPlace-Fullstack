@@ -1,15 +1,32 @@
-import React from "react";
-import item from "../../Assets/Product-1.png";
-import star from "../../Assets/Vector.png";
+import React, { useEffect, useState } from "react";
 import heart from "../../Assets/heart.svg";
 import eye from "../../Assets/eye.svg";
 import profile from "../../Assets/Profile.png";
 
-const ItemSales = ({ count = 10 }) => {
+const ItemSales = () => {
+  const [items, setItems] = useState([]);
+
+  useEffect(() => {
+    fetch(
+      "http://localhost/AASTU-MarketPlace-Fullstack/AASTU-MARKETPLACE-react/aastu-marketplace-react/php/fetch.php"
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        // Clean up image URLs
+        const cleanedData = data.map((item) => ({
+          ...item,
+          itemProfile: item.itemProfile.split("\u0000")[0], // remove null characters
+        }));
+        console.log("Fetched items:", cleanedData);
+        setItems(cleanedData);
+      })
+      .catch((error) => console.error("Error fetching items:", error));
+  }, []);
+
   return (
     <section className="item-sales">
-      {[...Array(count)].map((_, index) => (
-        <div className="item-card" key={index}>
+      {items.map((item) => (
+        <div className="item-card" key={item.itemId}>
           <div className="item-upper">
             <div className="item-image">
               <div className="icons">
@@ -20,22 +37,22 @@ const ItemSales = ({ count = 10 }) => {
                   <img src={eye} alt="Eye Icon" />
                 </span>
               </div>
+              <img
+                className="item-img"
+                src={item.itemProfile}
+                alt="product image"
+              />
             </div>
-            <img className="item-img" src={item} alt={`Item ${index + 1}`} />
           </div>
           <div className="item-detail">
             <img src={profile} alt="customer-profile" width={50} height={50} />
             <div className="customer-profile">
               <div className="profile">
-                <h5>Item Name</h5>
+                <h5>{item.itemName}</h5>
                 <p>AASTU Electronics</p>
-                <div className="rating">
-                  {[...Array(5)].map((_, i) => (
-                    <img src={star} alt="Star" key={i} />
-                  ))}
-                </div>
+                <div className="rating">{item.itemRate}</div>
               </div>
-              <p>$25.98</p>
+              <p>{item.itemPrice} ETB</p>
             </div>
           </div>
         </div>

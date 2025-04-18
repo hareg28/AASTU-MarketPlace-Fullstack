@@ -7,9 +7,9 @@ const Wishlist = () => {
   return (
     <div className="">
       <WishlistHeader />
-      <ItemSales count={5} />
+      <ItemSales />
       <ThisMonthHeader />
-      <ItemSales count={5} />
+      <ItemSales />
     </div>
   );
 };
