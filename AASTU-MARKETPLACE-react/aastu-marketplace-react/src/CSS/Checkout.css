@@ -21,6 +21,15 @@ body {
     margin-bottom: 5px;
 }
 
+.error {
+    color: red;
+    font-size: 12px;
+    margin-left: 0.5rem;
+    margin-top: 0.5rem; 
+    font-weight: 500;
+    font-style: italic; 
+}
+
  .checkout {
     display: flex;
     flex-direction: column;

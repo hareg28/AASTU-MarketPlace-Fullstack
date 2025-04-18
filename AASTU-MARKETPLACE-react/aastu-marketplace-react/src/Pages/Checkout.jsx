@@ -3,7 +3,58 @@ import React from "react";
 import "../CSS/Checkout.css";
 import img613 from "../Assets/Frame 613.png";
 import img611 from "../Assets/Frame 611.png";
+import axios from "axios";
+import { useState } from "react";
+
+
 const Checkout = () => {
+
+    const [formData, setFormData] = useState({
+        Fname: "",
+        cname: "",
+        city: "",
+        address: "",
+        phone: "",
+        email: ""
+    });
+   const [errors, setErrors] = useState({});
+    const handleChange = async(e) => {
+        const { name, value } = e.target;
+        setFormData({
+            ...formData,
+            [name]: value
+        });
+    }
+    const handleSubmit = async (e) => {
+      e.preventDefault();
+      
+      // Clear previous errors
+      setErrors({});
+
+      // Send data to the PHP backend
+      const response = await fetch('http://localhost/backend/validateInfo.php', {
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(formData),
+      });
+
+      const result = await response.json();
+
+      if (result.errors) {
+          setErrors(result.errors); // Set errors if any
+      } else {
+          // Handle successful validation
+          console.log('Form submitted successfully', result);
+          
+          const confirmationMessage = document.getElementById('confirmation-message');
+          confirmationMessage.innerHTML = "<p>Order placed successfully!</p>";
+
+      }
+  };
+          
+
     return(
         <div>
             <div className="sub-nav">
@@ -18,34 +69,41 @@ const Checkout = () => {
      
     <div className="checkout" id="billing-form">
       <h2>Billing Details</h2>
-      <form id="billing-form">
+      <form id="billing-form" method="post" action="" onSubmit={handleSubmit}>
       <div className="form-info">
-        <label for="Fname">First Name <sup>*</sup></label>
-        <input type="text" id="Fname" required />
+        <label for="Fname">Full Name <sup>*</sup></label>
+        <input type="text" id="Fname" name="Fname" value={formData.Fname} onChange={handleChange}  />
+        {errors.Fname && <span className="error">{errors.Fname}</span>}
+        
       </div>
       <div className="form-info">
         <label for="Cname">Company Name</label>
-        <input type="text" id="Cname" />
+        <input type="text" id="Cname" name="cname" value={formData.cname} onChange={handleChange}  />
+        {errors.cname && <span className="error">{errors.cname}</span>}
       </div>
       <div className="form-info">
         <label for="address">Street Address <sup>*</sup></label>
-        <input type="text" id="address" required />
+        <input type="text" id="address" name="address" value={formData.address} onChange={handleChange} />
+        {errors.address && <span className="error">{errors.address}</span>}
       </div>
       <div className="form-info">
         <label for="Apartfloor">Apartment, Floor, etc. (optional)</label>
-        <input type="text" id="Apartfloor" />
+        <input type="text" id="Apartfloor" name="Apartfloor" />
       </div>
       <div className="form-info">
         <label for="city">Town/city <sup>*</sup></label>
-        <input type="text" id="city" required />
+        <input type="text" id="city"  name="city" value={formData.city} onChange={handleChange}  />
+        {errors.city && <span className="error">{errors.city}</span>}
       </div>
       <div className="form-info">
         <label for="phone">Phone Number <sup>*</sup></label>
-        <input type="tel" id="phone" required />
+        <input type="tel" id="phone" name="phone"  value={formData.phone} onChange={handleChange} />
+        {errors.phone&& <span className="error">{errors.phone}</span>}
       </div>
       <div className="form-info">
         <label for="email">Email Address <sup>*</sup></label>
-        <input type="email" id="email" required />
+        <input type="email" id="email" name="email"  value={formData.email} onChange={handleChange} />
+        {errors.email && <span className="error">{errors.email}</span>}
       </div>
       <div className="tick">
         <input type="checkbox" id="check" />
