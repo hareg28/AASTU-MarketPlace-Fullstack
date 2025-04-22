@@ -1,19 +1,17 @@
 import React from "react";
 import "../CSS/signup.css";
+import signupVector from "../Assets/signup_vector2.png";
+import loginIcon from "../Assets/login_icon.png";
 
 const Signup = () => {
   return (
     <div className="content-container">
       <div className="login-vector">
-        <img
-          src="../Assets/signup_vector2.png"
-          alt="Signup Vector"
-          style={{ height: "70%" }}
-        />
+        <img src={signupVector} alt="Signup Vector" style={{ height: "70%" }} />
       </div>
       <div className="form-container">
         <img
-          src="../Assets/login_icon.png"
+          src={loginIcon}
           alt="Login Icon"
           style={{ height: "150px", width: "auto" }}
         />
