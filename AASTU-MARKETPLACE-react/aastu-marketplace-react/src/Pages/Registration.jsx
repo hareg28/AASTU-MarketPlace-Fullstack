@@ -1,6 +1,5 @@
 import React from "react";
 import signupVector from "../Assets/signup_vector2.png";
-import loginIcon from "../Assets/login_icon.png";
 import "../CSS/Registration.css"
 import favicon from "../Assets/AASTUMARKETPLACE.png";
 import { Link } from "react-router-dom";
@@ -26,11 +25,10 @@ export const Registration = () => {
         </div>
         <div className="registration-form-container">
           <div className="form-header">
-            <img
-              src={loginIcon}
-              alt="AASTU Marketplace logo"
-              className="logo"
-            />
+            <i
+              className="fas fa-user-circle"
+              style={{ fontSize: "64px", color: "#555" }}
+            ></i>
             <h1>Create Account</h1>
             <p>Join our community of buyers and sellers</p>
           </div>
@@ -110,6 +108,47 @@ export const Registration = () => {
                   required
                 />
               </div>
+              <div className="form-group">
+                <label htmlFor="ProfilePicture">Upload Profile Picture*</label>
+                <div style={{ position: "relative", display: "inline-block" }}>
+                  <input
+                    type="file"
+                    name="ProfilePicture"
+                    id="ProfilePicture"
+                    style={{
+                      opacity: 0,
+                      position: "absolute",
+                      zIndex: 2,
+                      cursor: "pointer",
+                      width: "100%",
+                      height: "100%",
+                    }}
+                  />
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      border: "2px dashed #ccc",
+                      borderRadius: "8px",
+                      padding: "10px",
+                      backgroundColor: "#f9f9f9",
+                      cursor: "pointer",
+                    }}
+                  >
+                    <span
+                      style={{
+                        fontSize: "16px",
+                        color: "#555",
+                        marginRight: "10px",
+                      }}
+                    >
+                      👤
+                    </span>
+                    <span style={{ color: "#555" }}>Choose a file</span>
+                  </div>
+                </div>
+              </div>
             </div>
 
             <div className="form-row">
@@ -159,8 +198,7 @@ export const Registration = () => {
 
           <div className="form-footer">
             <p>
-              Already have an account?{" "}
-              <Link to="/login">Log in</Link>
+              Already have an account? <Link to="/login">Log in</Link>
             </p>
           </div>
         </div>
