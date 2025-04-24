@@ -9,6 +9,7 @@ import { CSSTransition } from "react-transition-group";
 const Layout = () => {
   const location = useLocation();
   const isSignupPage = location.pathname === "/signup";
+  const isLoginPage = location.pathname == "/login";
   const navRef = useRef(null);
   const footerRef = useRef(null);
 
@@ -16,7 +17,7 @@ const Layout = () => {
     <div>
       <div className="App">
         <CSSTransition
-          in={!isSignupPage}
+          in={!isSignupPage && !isLoginPage}
           timeout={{ enter: 500, exit: 300 }}
           classNames="fade"
           unmountOnExit
@@ -30,7 +31,7 @@ const Layout = () => {
           <Outlet />
         </div>
         <CSSTransition
-          in={!isSignupPage}
+          in={!isSignupPage && !isLoginPage}
           timeout={{ enter: 500, exit: 300 }}
           classNames="fade"
           unmountOnExit

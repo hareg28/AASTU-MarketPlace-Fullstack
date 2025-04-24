@@ -3,6 +3,7 @@ import signupVector from "../Assets/signup_vector2.png";
 import loginIcon from "../Assets/login_icon.png";
 import "../CSS/Registration.css"
 import favicon from "../Assets/AASTUMARKETPLACE.png";
+import { Link } from "react-router-dom";
 export const Registration = () => {
   return (
     <div className="registration-page">
@@ -159,7 +160,7 @@ export const Registration = () => {
           <div className="form-footer">
             <p>
               Already have an account?{" "}
-              <a href="../Log in Page/login.html">Log in</a>
+              <Link to="/login">Log in</Link>
             </p>
           </div>
         </div>
