@@ -52,8 +52,8 @@ export const Registration = () => {
                 <input
                   type="email"
                   id="email"
-                  placeholder="username@aastustudent.edu.et"
-                  pattern=".+@aastustudent\.edu\.et"
+                  placeholder="username@aastu.edu.et"
+                  pattern=".+@aastu\.edu\.et"
                   required
                 />
                 <small>Must use your AASTU institutional email</small>
@@ -68,7 +68,6 @@ export const Registration = () => {
                   id="idNumber"
                   placeholder="AASTU ID"
                   required
-                  pattern="[A-Za-z0-9]{8,12}"
                 />
               </div>
               <div className="form-group">
