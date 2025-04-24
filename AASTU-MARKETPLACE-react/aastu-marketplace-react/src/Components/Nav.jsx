@@ -55,7 +55,7 @@ const Nav = () => {
               <a href="/About Page/About_us.html">About</a>
             </li>
             <li>
-              <Link to="/Pages/signup">Sign Up</Link>
+              <Link to="/signup">Sign Up</Link>
             </li>
           </ul>
           <div className="search-container">
