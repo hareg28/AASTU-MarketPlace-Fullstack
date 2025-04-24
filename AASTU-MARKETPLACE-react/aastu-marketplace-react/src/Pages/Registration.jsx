@@ -8,51 +8,149 @@ export const Registration = () => {
     <div className="registration-page">
       <meta charSet="UTF-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <title>Signup Page</title>
+      <title>AASTU Marketplace - Sign Up</title>
       <link rel="icon" href={favicon} type="image/x-icon" />
       <link rel="stylesheet" href="signup.css" />
-      <div className="registration-content-container">
-        <div className="registration-login-vector">
-          <img src={signupVector} height="70%" />
+      <div className="registration-grid-container">
+        <div className="registration-vector-container">
+          <img
+            src={signupVector}
+            alt="AASTU Marketplace illustration"
+            className="vector-image"
+          />
+          <div className="vector-content">
+            <h2>Welcome to AASTU Marketplace</h2>
+            <p>The official e-commerce platform for AASTU students and staff</p>
+          </div>
         </div>
         <div className="registration-form-container">
-          <img src={loginIcon} alt="login icon" height="150px" width="auto" />
-          <h1>Create your account</h1>
-          <p>Enter the fields below to get started</p>
-          <form id="registration-signin-form">
-            <label htmlFor="fullName">Full name*</label>
-            <input
-              type="text"
-              id="fullName"
-              placeholder="Enter Full name"
-              required
+          <div className="form-header">
+            <img
+              src={loginIcon}
+              alt="AASTU Marketplace logo"
+              className="logo"
             />
-            <label htmlFor="email">Email address*</label>
-            <input type="email" id="email" placeholder="Enter email" required />
-            <label htmlFor="password">Password*</label>
-            <input
-              type="password"
-              id="password"
-              placeholder="Create a password"
-              required
-            />
-            <div className="registration-option">
-              Buyer
-              <input name="checkbox" defaultValue="buyer" type="radio" />
-              Seller
-              <input name="checkbox" defaultValue="seller" type="radio" />
+            <h1>Create Account</h1>
+            <p>Join our community of buyers and sellers</p>
+          </div>
+
+          <form id="registration-form">
+            <div className="form-row">
+              <div className="form-group">
+                <label htmlFor="fullName">Full Name*</label>
+                <input
+                  type="text"
+                  id="fullName"
+                  placeholder="Enter your full name"
+                  required
+                />
+              </div>
             </div>
-            <button type="submit">Create account</button>
+
+            <div className="form-row">
+              <div className="form-group">
+                <label htmlFor="email">AASTU Email*</label>
+                <input
+                  type="email"
+                  id="email"
+                  placeholder="username@aastu.edu.et"
+                  required
+                />
+              </div>
+            </div>
+
+            <div className="form-row double-column">
+              <div className="form-group">
+                <label htmlFor="idNumber">ID Number*</label>
+                <input
+                  type="text"
+                  id="idNumber"
+                  placeholder="AASTU ID"
+                  required
+                />
+              </div>
+              <div className="form-group">
+                <label htmlFor="phone">Phone*</label>
+                <input
+                  type="tel"
+                  id="phone"
+                  placeholder="09XXXXXXXX"
+                  required
+                />
+              </div>
+            </div>
+
+            <div className="form-row double-column">
+              <div className="form-group">
+                <label htmlFor="password">Password*</label>
+                <input
+                  type="password"
+                  id="password"
+                  placeholder="Create password"
+                  required
+                />
+              </div>
+              <div className="form-group">
+                <label htmlFor="confirmPassword">Confirm*</label>
+                <input
+                  type="password"
+                  id="confirmPassword"
+                  placeholder="Confirm password"
+                  required
+                />
+              </div>
+            </div>
+
+            <div className="form-row">
+              <div className="form-group account-type">
+                <label>Account Type*</label>
+                <div className="radio-group">
+                  <label>
+                    <input
+                      type="radio"
+                      name="accountType"
+                      value="buyer"
+                      required
+                    />
+                    <span className="radio-custom"></span>
+                    Buyer
+                  </label>
+                  <label>
+                    <input
+                      type="radio"
+                      name="accountType"
+                      value="seller"
+                      required
+                    />
+                    <span className="radio-custom"></span>
+                    Seller
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <div className="form-row">
+              <div className="form-group terms">
+                <input type="checkbox" id="terms" required />
+                <label htmlFor="terms">
+                  I agree to the terms and conditions
+                </label>
+              </div>
+            </div>
+
+            <div className="form-row">
+              <button type="submit" className="submit-btn">
+                Create Account
+              </button>
+            </div>
           </form>
-          <p>
-            Already have an account?{" "}
-            <a
-              href="../Log in Page/login.html"
-              className="registration-switch"
-            >
-              Log in
-            </a>
-          </p>
+
+          <div className="form-footer">
+            <p>
+              Already have an account?{" "}
+              <a href="../Log in Page/login.html">Log in</a>
+            </p>
+          </div>
         </div>
       </div>
     </div>
