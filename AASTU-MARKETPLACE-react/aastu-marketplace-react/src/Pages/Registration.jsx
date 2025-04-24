@@ -54,8 +54,10 @@ export const Registration = () => {
                   type="email"
                   id="email"
                   placeholder="username@aastu.edu.et"
+                  pattern=".+@aastu\.edu\.et"
                   required
                 />
+                <small>Must use your AASTU institutional email</small>
               </div>
             </div>
 
@@ -67,6 +69,7 @@ export const Registration = () => {
                   id="idNumber"
                   placeholder="AASTU ID"
                   required
+                  pattern="[A-Za-z0-9]{8,12}"
                 />
               </div>
               <div className="form-group">
@@ -76,6 +79,7 @@ export const Registration = () => {
                   id="phone"
                   placeholder="09XXXXXXXX"
                   required
+                  pattern="[0-9]{10}"
                 />
               </div>
             </div>
@@ -88,7 +92,13 @@ export const Registration = () => {
                   id="password"
                   placeholder="Create password"
                   required
+                  minLength="8"
                 />
+                <div className="password-strength">
+                  <span className="strength-bar"></span>
+                  <span className="strength-bar"></span>
+                  <span className="strength-bar"></span>
+                </div>
               </div>
               <div className="form-group">
                 <label htmlFor="confirmPassword">Confirm*</label>
@@ -133,7 +143,8 @@ export const Registration = () => {
               <div className="form-group terms">
                 <input type="checkbox" id="terms" required />
                 <label htmlFor="terms">
-                  I agree to the terms and conditions
+                  I agree to the <a href="#">Terms of Service</a> and{" "}
+                  <a href="#">Privacy Policy</a>*
                 </label>
               </div>
             </div>
