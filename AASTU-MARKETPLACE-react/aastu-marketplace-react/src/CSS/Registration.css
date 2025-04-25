@@ -386,3 +386,171 @@ input[type="radio"]:checked + .radio-custom::after {
     gap: 0.5rem;
   }
 }
+/* Error Styling */
+.error {
+  border-color: #ff4d4f !important;
+}
+
+.error-message {
+  color: #ff4d4f;
+  font-size: 0.8rem;
+  margin-top: 0.25rem;
+  display: block;
+}
+
+/* Password Strength */
+.password-strength {
+  margin-top: 0.5rem;
+}
+
+.strength-indicator {
+  font-size: 0.8rem;
+}
+
+.strength-indicator.weak {
+  color: #ff4d4f;
+}
+
+.strength-indicator.medium {
+  color: #faad14;
+}
+
+.strength-indicator.strong {
+  color: #52c41a;
+}
+
+.strength-bars {
+  display: flex;
+  gap: 3px;
+  margin-top: 0.25rem;
+}
+
+.strength-bar {
+  height: 4px;
+  flex-grow: 1;
+  border-radius: 2px;
+  background: #eee;
+}
+
+.strength-bar.weak {
+  background: #ff4d4f;
+}
+
+.strength-bar.medium {
+  background: #faad14;
+}
+
+.strength-bar.strong {
+  background: #52c41a;
+}
+
+/* File Upload */
+.file-upload-container {
+  position: relative;
+}
+
+.file-input {
+  opacity: 0;
+  position: absolute;
+  z-index: -1;
+}
+
+.file-upload-label {
+  display: flex;
+  align-items: center;
+  padding: 0.75rem;
+  border: 2px dashed #d9d9d9;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.file-upload-label:hover {
+  border-color: #1890ff;
+}
+
+.upload-icon {
+  margin-right: 0.5rem;
+  font-size: 1.2rem;
+}
+
+.file-name {
+  margin-right: 0.5rem;
+  font-weight: 500;
+}
+
+.file-size {
+  color: #888;
+  font-size: 0.8rem;
+}
+
+.clear-file-btn {
+  position: absolute;
+  right: 0.5rem;
+  top: 0.5rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #ff4d4f;
+  padding: 0.25rem;
+}
+
+.image-preview {
+  margin-top: 0.5rem;
+}
+
+.image-preview img {
+  max-width: 100px;
+  max-height: 100px;
+  border-radius: 4px;
+}
+
+/* Loading Spinner */
+.spinner {
+  display: inline-block;
+  width: 1rem;
+  height: 1rem;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top-color: white;
+  animation: spin 1s ease-in-out infinite;
+  margin-right: 0.5rem;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+/* Enhanced Error Styling */
+.error {
+  border-color: #ff4d4f !important;
+}
+
+.error-message {
+  color: #ff4d4f;
+  font-size: 0.8rem;
+  margin-top: 0.25rem;
+  display: block;
+}
+
+/* File Upload Error */
+.file-upload-container .error-message {
+  margin-top: 0.5rem;
+}
+
+/* Password Strength Improvements */
+.password-strength {
+  margin-top: 0.5rem;
+  font-size: 0.8rem;
+}
+
+.strength-indicator.weak {
+  color: #ff4d4f;
+}
+
+.strength-indicator.medium {
+  color: #faad14;
+}
+
+.strength-indicator.strong {
+  color: #52c41a;
+}
