@@ -57,9 +57,6 @@ const Nav = () => {
             <li>
               <Link to="/signup">Sign Up</Link>
             </li>
-            <li>
-              <Link to="/test">Test</Link>
-            </li>
           </ul>
           <div className="search-container">
             <input
