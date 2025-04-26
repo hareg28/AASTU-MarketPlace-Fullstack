@@ -7,20 +7,20 @@ const ItemSales = () => {
   const [items, setItems] = useState([]);
 
   useEffect(() => {
-    fetch(
-      "http://localhost/AASTU-MarketPlace-Fullstack/AASTU-MARKETPLACE-react/aastu-marketplace-react/php/fetch.php"
-    )
-      .then((response) => response.json())
-      .then((data) => {
-        // Clean up image URLs
-        const cleanedData = data.map((item) => ({
-          ...item,
-          itemProfile: item.itemProfile.split("\u0000")[0], // remove null characters
-        }));
-        console.log("Fetched items:", cleanedData);
-        setItems(cleanedData);
-      })
-      .catch((error) => console.error("Error fetching items:", error));
+    const fetchItems = async () => {
+      const { data, error } = await supabase
+        .from("itemdetail")
+        .select("*")
+        .order("itemId", { ascending: false });
+
+      if (error) {
+        console.error("Fetch error:", error);
+      } else {
+        setItems(data);
+      }
+    };
+
+    fetchItems();
   }, []);
 
   return (
@@ -39,8 +39,8 @@ const ItemSales = () => {
               </div>
               <img
                 className="item-img"
-                src={item.itemProfile}
-                alt="product image"
+                src={`http://localhost/aastu-marketplace/uploads/${item.itemProfile}`}
+                alt="product"
               />
             </div>
           </div>

@@ -5,9 +5,11 @@ import Banner from "../Components/home/banner";
 import Sidebar from "../Components/home/sidebar";
 import ItemSales from "../Components/home/item";
 import PostModal from "../Components/home/Post";
+import "..//CSS/Post.css";
 
 const Home = () => {
   const [showModal, setShowModal] = useState(false);
+
   return (
     <div className="home">
       <div className="home-upper">
@@ -35,7 +37,7 @@ const Home = () => {
                 className="modal-close-btn"
                 onClick={() => setShowModal(false)}
               >
-                Close
+                X
               </button>
             </div>
           </div>
