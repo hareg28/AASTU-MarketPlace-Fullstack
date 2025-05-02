@@ -4,16 +4,162 @@ header("Content-Type: application/json");
 header("Access-Control-Allow-Methods: POST");
 header("Access-Control-Allow-Headers: Content-Type");
 
-
 $dbHost = "aws-0-us-east-2.pooler.supabase.com";
 $dbPort = "6543";
 $dbName = "postgres";
 $username = "postgres.znwwxleyxvhljyhzvtsg";
-$password = "2P5llhiFbxV5E8rr";
-$tableName = 'RegistrationData';
+$password = "mhAsdMzjtm2E3esZ";
+$tableName = 'registrationdata';
 
-function dd($value)
-{
+function generateVerificationCode() {
+    return str_pad(mt_rand(0, 999999), 6, '0', STR_PAD_LEFT);
+}
+
+// Load Composer's autoloader (if using Composer)
+// require 'vendor/autoload.php';
+
+// Manually load PHPMailer classes
+require '../backend/PHPMailer-master/src/PHPMailer.php';
+require '../backend/PHPMailer-master/src/SMTP.php';
+require '../backend/PHPMailer-master/src/Exception.php';
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
+
+function sendVerificationEmail($email, $code) {
+    $mail = new PHPMailer(true);
+    
+    try {
+        // Server settings
+        $mail->isSMTP();
+        $mail->Host       = 'smtp.gmail.com';
+        $mail->SMTPAuth   = true;
+        $mail->Username   = 'dawitgetachew808@gmail.com'; // Your Gmail
+        $mail->Password   = 'ltmi inho ejhv iooz'; // Use App Password, not regular password
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+        $mail->Port       = 587;
+        
+        // Recipients
+        $mail->setFrom('dawitgetachew808@gmail.com', 'AASTU Marketplace');
+        $mail->addAddress($email);
+        
+        // Content
+        $mail->isHTML(true);
+        $mail->Subject = 'AASTU Marketplace - Email Verification';
+        
+        // Beautiful HTML email body
+        $mail->Body = '
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Email Verification</title>
+            <style>
+                body {
+                    font-family: \'Arial\', sans-serif;
+                    line-height: 1.6;
+                    color: #333;
+                    max-width: 600px;
+                    margin: 0 auto;
+                    padding: 20px;
+                }
+                .header {
+                    background-color: #2c3e50;
+                    color: white;
+                    padding: 20px;
+                    text-align: center;
+                    border-radius: 5px 5px 0 0;
+                }
+                .content {
+                    padding: 30px;
+                    background-color: #f9f9f9;
+                    border-left: 1px solid #ddd;
+                    border-right: 1px solid #ddd;
+                }
+                .code-container {
+                    margin: 25px 0;
+                    text-align: center;
+                }
+                .verification-code {
+                    display: inline-block;
+                    padding: 15px 30px;
+                    background-color: #3498db;
+                    color: white;
+                    font-size: 24px;
+                    font-weight: bold;
+                    letter-spacing: 2px;
+                    border-radius: 5px;
+                    text-decoration: none;
+                }
+                .footer {
+                    padding: 15px;
+                    text-align: center;
+                    background-color: #ecf0f1;
+                    border-radius: 0 0 5px 5px;
+                    font-size: 12px;
+                    color: #7f8c8d;
+                    border-left: 1px solid #ddd;
+                    border-right: 1px solid #ddd;
+                    border-bottom: 1px solid #ddd;
+                }
+                .note {
+                    font-size: 14px;
+                    color: #e74c3c;
+                    margin-top: 20px;
+                    text-align: center;
+                }
+                .logo {
+                    max-width: 150px;
+                    margin-bottom: 15px;
+                }
+            </style>
+        </head>
+        <body>
+            <div class="header">
+                <h2>AASTU Marketplace</h2>
+                <p>Email Verification</p>
+            </div>
+            
+            <div class="content">
+                <p>Hello,</p>
+                <p>Thank you for registering with AASTU Marketplace. To complete your registration, please use the following verification code:</p>
+                
+                <div class="code-container">
+                    <div class="verification-code">'.$code.'</div>
+                </div>
+                
+                <p class="note">This code will expire in 1 minute. Please do not share this code with anyone.</p>
+                
+                <p>If you didn\'t request this code, you can safely ignore this email.</p>
+                
+                <p>Best regards,<br>The AASTU Marketplace Team</p>
+            </div>
+            
+            <div class="footer">
+                <p>&copy; '.date('Y').' AASTU Marketplace. All rights reserved.</p>
+                <p>Addis Ababa Science and Technology University</p>
+            </div>
+        </body>
+        </html>
+        ';
+        
+        // Plain text version for non-HTML email clients
+        $mail->AltBody = "AASTU Marketplace - Email Verification\n\n".
+                         "Your verification code is: $code\n\n".
+                         "This code will expire in 1 minute.\n\n".
+                         "If you didn't request this code, please ignore this email.";
+        
+        $mail->send();
+        return true;
+    } catch (Exception $e) {
+        error_log("Mailer Error: {$mail->ErrorInfo}");
+        return false;
+    }
+}
+
+function dd($value) {
     echo '<pre>';
     echo var_dump($value);
     echo '</pre>';
@@ -23,9 +169,9 @@ function dd($value)
 $response = [
     'success' => false,
     'message' => '',
-    'errors' => []
+    'errors' => [],
+    'requires_verification' => false
 ];
-
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     $response['message'] = 'Invalid request method';
@@ -34,16 +180,91 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 }
 
 try {
-
-
-
     // Get raw JSON data if Content-Type is application/json
     $input = file_get_contents('php://input');
     if (strpos($_SERVER['CONTENT_TYPE'], 'application/json') !== false) {
         $_POST = json_decode($input, true);
     }
 
-    // Validate required fields
+    // Handle verification request
+    if (isset($_POST['verification_code'])) {
+        require './db_connection.php';
+
+        // Ensure $conn is initialized
+        if (!isset($conn) || $conn === null) {
+            throw new Exception("Database connection not established");
+        }
+        
+        $email = $_POST['Email'];
+        $code = $_POST['verification_code'];
+        
+        // Check if code is valid and not expired
+        $stmt = $conn->prepare("SELECT * FROM verification_codes WHERE email = :email AND code = :code AND expires_at > NOW()");
+        $stmt->bindParam(":email", $email);
+        $stmt->bindParam(":code", $code);
+        $stmt->execute();
+        $result = $stmt->fetch();
+        
+        if ($result) {
+            // Mark user as verified
+            $updateStmt = $conn->prepare("UPDATE registrationdata SET verified = true WHERE Email = :email");
+            $updateStmt->bindParam(":email", $email);
+            $updateStmt->execute();
+            
+            // Delete the used code
+            $deleteStmt = $conn->prepare("DELETE FROM verification_codes WHERE email = :email AND code = :code");
+            $deleteStmt->bindParam(":email", $email);
+            $deleteStmt->bindParam(":code", $code);
+            $deleteStmt->execute();
+            
+            $response['success'] = true;
+            $response['message'] = "Email verified successfully!";
+        } else {
+            $response['message'] = "Invalid or expired verification code";
+        }
+        
+        echo json_encode($response);
+        exit;
+    }
+
+    // Handle resend verification code request
+    if (isset($_POST['resend_verification'])) {
+        require './db_connection.php';
+
+        // Ensure $conn is initialized
+        if (!isset($conn) || $conn === null) {
+            throw new Exception("Database connection not established");
+        }
+        
+        $email = $_POST['Email'];
+        $code = generateVerificationCode();
+        $expiresAt = date('Y-m-d H:i:s', strtotime('+1 minute'));
+        
+        // Delete any existing codes for this email
+        $deleteStmt = $conn->prepare("DELETE FROM verification_codes WHERE email = :email");
+        $deleteStmt->bindParam(":email", $email);
+        $deleteStmt->execute();
+        
+        // Insert new code
+        $insertStmt = $conn->prepare("INSERT INTO verification_codes (email, code, expires_at) VALUES (:email, :code, :expires_at)");
+        $insertStmt->bindParam(":email", $email);
+        $insertStmt->bindParam(":code", $code);
+        $insertStmt->bindParam(":expires_at", $expiresAt);
+        $insertStmt->execute();
+        
+        // Send email
+        if (sendVerificationEmail($email, $code)) {
+            $response['success'] = true;
+            $response['message'] = "Verification code resent successfully!";
+        } else {
+            $response['message'] = "Failed to send verification email";
+        }
+        
+        echo json_encode($response);
+        exit;
+    }
+
+    // Original registration validation
     $requiredFields = ['Id', 'Email', 'Name', 'Phone', 'Password', 'Role'];
     foreach ($requiredFields as $field) {
         if (empty($_POST[$field] ?? null)) {
@@ -117,16 +338,13 @@ try {
         exit;
     }
 
-    // Connect to Supabase PostgreSQL with SSL
-    $dsn = "pgsql:host={$dbHost};port={$dbPort};dbname={$dbName};options='--client_encoding=UTF8'";
-    $conn = null;
-
-    try {
-        $conn = new PDO($dsn, $username, $password, [PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC]);
-    } catch (PDOException $e) {
-        die("Database connection failed: " . $e->getMessage() . ". Please verify the hostname and network connectivity.");
+    require './db_connection.php';
+    
+    // Ensure $conn is initialized
+    if (!isset($conn) || $conn === null) {
+        throw new Exception("Database connection not established");
     }
-
+    
     // Check if user already exists
     $checkStmt = $conn->prepare("SELECT * FROM RegistrationData WHERE Email = :email OR Id = :id");
     $checkStmt->bindParam(":id", $_POST['Id'], PDO::PARAM_STR);
@@ -138,13 +356,11 @@ try {
         throw new Exception("User with this ID or Email already exists");
     }
 
-    // Hash passwor d
+    // Hash password
     $hashedPassword = password_hash($_POST['Password'], PASSWORD_DEFAULT);
 
     // Insert new user with prepared statement
-    $insertQuery = $conn->prepare("INSERT INTO $tableName (Id, Email, Name, Phone, Password, PPpath, Role) VALUES (?, ?, ?, ?, ?, ?, ?)
-    RETURNING Id");
-
+    $insertQuery = $conn->prepare("INSERT INTO $tableName (Id, Email, Name, Phone, Password, PPpath, Role, verified) VALUES (?, ?, ?, ?, ?, ?, ?, false)");
     $insertQuery->execute([
         $_POST['Id'],
         $_POST['Email'],
@@ -155,16 +371,22 @@ try {
         $_POST['Role']
     ]);
 
-    $insertResult = $insertQuery->fetchAll();
-
-    if (!$insertResult) {
-        throw new Exception("Failed to create user: " . pg_last_error($dbconn));
+    // Generate verification code
+    $verificationCode = generateVerificationCode();
+    $expiresAt = date('Y-m-d H:i:s', strtotime('+1 minute'));
+    
+    // Store verification code
+    $codeStmt = $conn->prepare("INSERT INTO verification_codes (email, code, expires_at) VALUES (?, ?, ?)");
+    $codeStmt->execute([$_POST['Email'], $verificationCode, $expiresAt]);
+    
+    // Send verification email
+    if (sendVerificationEmail($_POST['Email'], $verificationCode)) {
+        $response['success'] = true;
+        $response['message'] = "Registration successful! Please check your email for the verification code.";
+        $response['requires_verification'] = true;
+    } else {
+        throw new Exception("Registration successful but failed to send verification email");
     }
-
-    $response['success'] = true;
-    $response['message'] = "Registration successful!";
-    $response['data'] = $insertResult;
-
 
 } catch (Exception $e) {
     $response['message'] = $e->getMessage();
