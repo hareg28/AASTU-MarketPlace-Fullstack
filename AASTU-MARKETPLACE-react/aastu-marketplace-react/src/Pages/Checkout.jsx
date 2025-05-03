@@ -1,125 +1,287 @@
-import React from "react";
 
+
+import React, { useState } from "react";
+import { useNavigate, useLocation } from 'react-router-dom';
 import "../CSS/Checkout.css";
-import img613 from "../Assets/Frame 613.png";
-import img611 from "../Assets/Frame 611.png";
+
 const Checkout = () => {
-    return(
-        <div>
-            <div className="sub-nav">
-      <a style={{textdecoration: "none", color: "#aaa"}} href="#">Account&ensp;</a>/
-      <a style={{textdecoration: "none", color: "#aaa"}} href="#">My Account&ensp;</a
-      >/
-      <a style={{textdecoration: "none", color: "#aaa"}} href="#">Product&ensp;</a>/
-      <a style={{textdecoration: "none", color: "#aaa"}} href="#">View Cart&ensp;</a
-      >/
-      <p style={{display: "inline", color: "black"}}>&ensp;CheckOut</p>
-    </div>
-     
-    <div className="checkout" id="billing-form">
-      <h2>Billing Details</h2>
-      <form id="billing-form">
-      <div className="form-info">
-        <label for="Fname">First Name <sup>*</sup></label>
-        <input type="text" id="Fname" required />
-      </div>
-      <div className="form-info">
-        <label for="Cname">Company Name</label>
-        <input type="text" id="Cname" />
-      </div>
-      <div className="form-info">
-        <label for="address">Street Address <sup>*</sup></label>
-        <input type="text" id="address" required />
-      </div>
-      <div className="form-info">
-        <label for="Apartfloor">Apartment, Floor, etc. (optional)</label>
-        <input type="text" id="Apartfloor" />
-      </div>
-      <div className="form-info">
-        <label for="city">Town/city <sup>*</sup></label>
-        <input type="text" id="city" required />
-      </div>
-      <div className="form-info">
-        <label for="phone">Phone Number <sup>*</sup></label>
-        <input type="tel" id="phone" required />
-      </div>
-      <div className="form-info">
-        <label for="email">Email Address <sup>*</sup></label>
-        <input type="email" id="email" required />
-      </div>
-      <div className="tick">
-        <input type="checkbox" id="check" />
-        <label for="check">Save this information for faster check-out next time</label>
-      </div>
-      <div className="order" id="order">
-        <button type="submit">Place Order</button>
-      </div>
-    </form>
-      <div id="confirmation-message"></div>
-    </div>
+  const location = useLocation();
+  const navigate = useNavigate();
+  const { cartItems = [] } = location.state || {};
   
+  const [loading, setLoading] = useState(false);
+  const [selectedPayment, setSelectedPayment] = useState(null);
+  const [paymentError, setPaymentError] = useState('');
+  const [orderSuccess, setOrderSuccess] = useState(false);
+  const [orderDetails, setOrderDetails] = useState(null);
+  
+  const [formData, setFormData] = useState({
+    fname: "",
+    companyName: "",
+    address: "",
+    apartFloor: "",
+    city: "",
+    phone: "",
+    email: "",
+  });
+  
+  const [errors, setErrors] = useState({});
 
-    <div className="selected-items">
-      <div className="item items">
-        <img className="img1" src={img613} alt="LCD monitor" />
-        <p>LCD monitor</p>
-      </div>
-      <div className="items price">
-        <p>$650</p>
-      </div>
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+    // Clear error when user starts typing
+    if (errors[name]) {
+      setErrors(prev => ({ ...prev, [name]: '' }));
+    }
+  };
 
-      <div className="item items">
-        <img
-          className="img1 img2"
-          src={img611}
-          alt="LCD monitor"
-        />
-        <p>HI Gamepd</p>
-      </div>
-      <div className="items price">
-        <p>$1110</p>
-      </div>
-    </div>
-    <div className="total">
-      <table>
-        <tr >
-          <td>Subtotal:</td>
-         
-          <td>$1750</td>
-        </tr>
+  const handlePaymentChange = (e) => {
+    setSelectedPayment(e.target.value);
+    setPaymentError('');
+  };
 
-        <tr>
-          <td>Shipping:</td>
+  const calculateTotal = () => {
+    return cartItems.reduce((total, item) => total + (item.price * item.quantity), 0);
+  };
 
-          <td>free</td>
-        </tr>
-        <tr>
-          <td>Total:</td>
+  const validateForm = () => {
+    const newErrors = {};
+    
+    // Required fields validation
+    if (!formData.fname.trim()) newErrors.fname = "Full name is required";
+    if (!formData.address.trim()) newErrors.address = "Address is required";
+    if (!formData.city.trim()) newErrors.city = "City is required";
+    if (!formData.phone.trim()) newErrors.phone = "Phone number is required";
+    if (!formData.email.trim()) newErrors.email = "Email is required";
+    
+    // Email format validation
+    if (formData.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+      newErrors.email = "Invalid email format";
+    }
+    
+    // Phone number validation (basic)
+    if (formData.phone && !/^[0-9]{10,15}$/.test(formData.phone)) {
+      newErrors.phone = "Invalid phone number";
+    }
+    
+    // Payment method validation
+    if (!selectedPayment) {
+      setPaymentError("Please select a payment method");
+    }
+    
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0 && selectedPayment;
+  };
 
-          <td>$1750</td>
-        </tr>
-      </table>
-      <div className="payment-method">
-        <input type="radio" name="pay" />
-        <label for="bank">Bank</label>
-        <div className="logo">
-          <img src="../Assets/Mastercard_Logo_1990-2048x1223.png" alt="" />
-          <img className="visa" src="../Assets/visa.png" alt="" />
-          <img className="paypal" src="../Assets/paypl.png" alt="" />
-        </div>
-
-        <input type="radio" name="pay" />
-        <label for="cash">Cash on Delivery</label>
-        <input type="radio" name="pay" />
-       <label>pay with Telebirr</label>
-       <input type="radio" name="pay" />
-        <label>pay with MPESSA</label>
-      </div>
-
-     
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    
+    if (!validateForm()) return;
+    
+    setLoading(true);
+    
+    const orderData = {
+      customer_info: formData,
+      payment_method: selectedPayment,
+      cart_items: cartItems.map(item => ({
+        product_id: item.product_id,
+        name: item.name,
+        price: item.price,
+        quantity: item.quantity,
+        image: item.image
+      })),
+      total_amount: calculateTotal(),
+      order_date: new Date().toISOString()
+    };
+console.log(orderData);
+    try {
+      const response = await fetch("http://localhost/backend/placeOrder.php", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(orderData),
+      });
       
-    </div>
+      const data = await response.json();
+      
+      if (data.success) {
+        setOrderDetails({
+          orderId: data.order_id,
+          total: data.total_amount,
+          items: cartItems
+        });
+        setOrderSuccess(true);
+        // You could redirect to a success page here:
+
+        // navigate('/order-success', { state: { orderId: data.order_id } });
+
+      } else {
+        setErrors(data.errors || { general: "Failed to place order" });
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      setErrors({ general: "An error occurred while placing your order" });
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // ... [keep your existing render methods] ...
+  const renderBreadcrumbs = () => (
+        <div className="sub-nav">
+          <a href="#" style={{ textDecoration: "none", color: "#aaa" }}>Account&ensp;</a>/
+          <a href="#" style={{ textDecoration: "none", color: "#aaa" }}>My Account&ensp;</a>/
+          <a href="#" style={{ textDecoration: "none", color: "#aaa" }}>Product&ensp;</a>/
+          <a href="#" style={{ textDecoration: "none", color: "#aaa" }}>View Cart&ensp;</a>/
+          <p style={{ display: "inline", color: "black" }}>&ensp;CheckOut</p>
         </div>
+      );
+    
+      const renderBillingForm = () => (
+        <div className="checkout" id="billing-form">
+          <h2>Billing Details</h2>
+          <form onSubmit={handleSubmit}>
+            {[
+              { id: "fname", label: "Full Name",  name: "fname" },
+              { id: "Cname", label: "Company Name",  name: "companyName" },
+              { id: "address", label: "Street Address",  name: "address" },
+              { id: "Apartfloor", label: "Apartment, Floor, etc. (optional)",  name: "apartFloor" },
+              { id: "city", label: "Town/city", name: "city" },
+              { id: "phone", label: "Phone Number",  name: "phone", type: "tel" },
+              { id: "email", label: "Email Address",  name: "email", type: "email" },
+            ].map((field) => (
+              <div className="form-info" key={field.id}>
+                <label htmlFor={field.id}>
+                  {field.label} {field.required && <sup>*</sup>}
+                </label>
+                <input
+                  type={field.type || "text"}
+                  id={field.id}
+                  name={field.name}
+                  value={formData[field.name]|| ""}
+                  onChange={handleChange}
+                />
+                {errors[field.name] && <span className="error">{errors[field.name]}</span>}
+              </div>
+            ))}
+    
+            <div className="tick">
+              <input type="checkbox" id="check" />
+              <label htmlFor="check">Save this information for faster check-out next time</label>
+            </div>
+            
+            <div className="order">
+              <button type="submit">Place Order</button>
+            </div>
+            <div id="confirmation-message"></div>
+          </form>
+          
+        </div>
+      );
+    
+      const renderCartItems = () => {
+        if (cartItems.length === 0) {
+          return (
+            <div className="empty-cart">
+              <p></p>
+            </div>
+          );
+        }
+    
+        return (
+          <div>
+            {cartItems.map((item) => (
+              <div className="selected-items" key={item.id}>
+                <div className="item items">
+                  <img className="img1" src={item.image} alt={item.name} />
+                  <p>{item.name}</p>
+                </div>
+                <div className="items price">
+                  <p>{item.price}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        );
+      };
+    
+      const renderPaymentSection = () => {
+        const paymentMethods = [
+          { value: "bank", label: "Bank" },
+          { value: "cash", label: "Cash on Delivery" },
+          { value: "Telebirr", label: "Pay with Telebirr" },
+          { value: "M-pessa", label: "Pay with M-PESSA" },
+        ];
+    
+        return (
+          <div className="total">
+            <table>
+              <tbody>
+                <tr>
+                  <td>Subtotal:</td>
+                  <td>{calculateTotal()}</td>
+                </tr>
+                <tr>
+                  <td>Shipping:</td>
+                  <td>free</td>
+                </tr>
+                <tr>
+                  <td>Total:</td>
+                  <td>{calculateTotal()}</td>
+                </tr>
+              </tbody>
+              
+            </table>
+    
+            <div className="payment-method">
+              {paymentMethods.map((method) => (
+                <div key={method.value}>
+                  <input
+                    type="radio"
+                    name="pay"
+                    value={method.value}
+                    onChange={handlePaymentChange}
+                    checked={selectedPayment === method.value}
+                  />
+                  <label>{method.label}</label>
+                </div>
+              ))}
+              {paymentError && <div className="error">{paymentError}</div>}
+            </div>
+          </div>
+        );
+      };
+  if (orderSuccess) {
+    return (
+      <div className="order-success">
+        <h2>Order Confirmed!</h2>
+        <p>Thank you for your purchase.</p>
+        <div className="order-details">
+          <p><strong>Order ID:</strong> {orderDetails.orderId}</p>
+          <p><strong>Total:</strong> ${orderDetails.total.toFixed(2)}</p>
+        </div>
+        <button onClick={() => navigate('/products')}>Continue Shopping</button>
+      </div>
     );
-}
+  }
+
+  return (
+    <div className="checkout-page">
+      {renderBreadcrumbs()}
+      <div className="checkout-container">
+        <div className="checkout-form-container">
+          {renderBillingForm()}
+        </div>
+        <div className="order-summary-container">
+          {renderCartItems()}
+          {renderPaymentSection()}
+        </div>
+      </div>
+      {errors.general && <div className="error-message">{errors.general}</div>}
+    </div>
+  );
+};
+
 export default Checkout;

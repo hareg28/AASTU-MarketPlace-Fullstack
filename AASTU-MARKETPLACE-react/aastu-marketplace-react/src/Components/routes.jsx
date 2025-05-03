@@ -6,11 +6,17 @@ import AccountSettings from "../Pages/AccountSettings";
 import Cart from "../Pages/Cart";
 import Checkout from "../Pages/Checkout"; 
 import ProductDetails from "../Pages/ProductDetails";
+import { CartProvider } from "./CartContext";
+
 
 const routes = createBrowserRouter([
   {
     path: "/",
-    element: <Layout />,
+    element: (
+      <CartProvider>
+      <Layout />
+      </CartProvider>
+    ),
     children: [
       { path: "contacus", element: <Contactus /> }, 
       { path: "accountsettings", element: <AccountSettings /> },

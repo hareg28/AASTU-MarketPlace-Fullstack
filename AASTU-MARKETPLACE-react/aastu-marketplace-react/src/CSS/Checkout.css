@@ -20,7 +20,13 @@ body {
     margin-left: 100px;
     margin-bottom: 5px;
 }
-
+.error {
+    color: red;
+    font-size: 12px;
+    
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
  .checkout {
     display: flex;
     flex-direction: column;
@@ -34,6 +40,127 @@ body {
     margin-left: 0.4rem;
     margin-bottom: 0.9rem;
 }
+
+
+
+/* Order Success Popup Styles */
+.order-success {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    max-width: 500px;
+    background: white;
+    padding: 2.5rem;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    z-index: 1000;
+    animation: fadeIn 0.3s ease-out forwards;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+  }
+  
+  .order-success h2 {
+    color: #2ecc71;
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    font-weight: 700;
+  }
+  
+  .order-success p {
+    color: #555;
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+  }
+  
+  .order-details {
+    background: #f8f9fa;
+    padding: 1.5rem;
+    border-radius: 8px;
+    margin: 1.5rem 0;
+    text-align: left;
+  }
+  
+  .order-details p {
+    margin: 0.5rem 0;
+    color: #333;
+    font-size: 1rem;
+  }
+  
+  .order-details strong {
+    color: #2c3e50;
+    font-weight: 600;
+    display: inline-block;
+    min-width: 100px;
+  }
+  
+  .order-success button {
+    background: #3498db;
+    color: white;
+    border: none;
+    padding: 0.8rem 1.8rem;
+    font-size: 1rem;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 1rem;
+    font-weight: 600;
+    box-shadow: 0 4px 6px rgba(52, 152, 219, 0.2);
+  }
+  
+  .order-success button:hover {
+    background: #2980b9;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 8px rgba(52, 152, 219, 0.3);
+  }
+  
+  .order-success button:active {
+    transform: translateY(0);
+  }
+  
+  /* Background overlay */
+  .order-success-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+    backdrop-filter: blur(3px);
+  }
+  
+  /* Animation */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translate(-50%, -40%);
+    }
+    to {
+      opacity: 1;
+      transform: translate(-50%, -50%);
+    }
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 600px) {
+    .order-success {
+      padding: 1.5rem;
+      width: 85%;
+    }
+    
+    .order-success h2 {
+      font-size: 1.5rem;
+    }
+    
+    .order-success p {
+      font-size: 1rem;
+    }
+  }
+
+
  .checkout >form .form-info {
     display: flex;
     flex-direction: column;
@@ -42,7 +169,9 @@ body {
  .checkout >form .form-info > input {
     padding: 0.35rem;
     background-color: whitesmoke;
+    color: black;
     border: none;
+
 }
  .checkout >form .form-info > label {
     margin: 0.2rem;

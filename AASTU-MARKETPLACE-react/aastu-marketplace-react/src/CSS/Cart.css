@@ -31,12 +31,59 @@ body {
 .prolist > .price{
     margin-left: 5rem;
 }
+
+.empty-cart {
+    display: flex;
+    gap: 55px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+   
+    
+
+}
+.shop-button {
+ 
+    background-color: #0056b3; 
+   
+    color: white; 
+    border: none; 
+    padding: 10px 20px; 
+    font-size: 16px; 
+    border-radius: 5px; 
+    cursor: pointer; 
+    transition: background-color 0.3s ease; 
+} 
+
+ .shop-button:hover {
+    background-color: #007bff ;
+}
+
 .product-list > .item > .img1 {
     width: 40px;
     height: 40px;
     margin-top: 2px;
     
 }
+.loading-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 50vh;
+  }
+  .loading-spinner {
+    border: 8px solid #f3f3f3; /* Light grey */
+    border-top: 8px solid #3498db; /* Blue */
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    animation: span 5s linear infinite; /* Reverse spin animation */
+  }
+  @keyframes span {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
 
 .product-list > .item > p {
     display: flex;
@@ -61,7 +108,7 @@ body {
     padding: 0;
 }
 
-.cart-buttons > .button > input {
+.cart-buttons > .button input {
     padding: 10px 20px;
     background: #004f7d;
     color: white;
@@ -70,7 +117,7 @@ body {
     border-radius: 5px;
 }
 
-.cart-buttons > .button > input:hover {
+.cart-buttons > .button input:hover {
     background-color: #00a9e3;
     border: none;
 }
@@ -97,7 +144,7 @@ body {
     padding: 8px 80px; 
 }
 
-.cart-total > .Checkout > a > input {
+.cart-total > .Checkout >  button {
     margin-right: 8.5rem;
     padding: 10px;
     margin-bottom: 10px;
@@ -108,38 +155,11 @@ body {
     cursor: pointer;
 }
 
-.cart-total > .Checkout > a > input:hover {
+.cart-total > .Checkout > button:hover {
     background-color: #00a9e3;   
 }
 
-.coupon {
-    display: flex;
-    justify-content: flex-end;
-    position: relative;
-     right: 17rem;
-     bottom: 24rem;     
-}
 
-.coupon > .size {
-    padding: 0.9rem;
-}
-
-.coupon > .space {
-    margin-right: 1rem;
-    border-radius: 5px;    
-}
-
-.coupon > button {
-    background-color: #004f7d;
-    color: white;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.coupon > button:hover {
-    background-color: #00a9e3;
-    border: none;
-}
 
 /* Media Queries */
 

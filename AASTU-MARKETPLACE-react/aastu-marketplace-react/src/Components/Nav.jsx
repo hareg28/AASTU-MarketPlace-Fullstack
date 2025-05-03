@@ -72,9 +72,9 @@ const Nav = () => {
             <a href="/WishList Page/wishlist.html">
               <img src={wishlistIcon} alt="Go to Wishlist" />
             </a>
-            <a href="/Cart Page/index.html">
+           <Link to ="/cart">
               <img src={cartIcon} alt="View Cart" />
-            </a>
+            </Link>
             <div
               className="dropdown-container"
               onMouseEnter={handleMouseEnter}
