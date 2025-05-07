@@ -278,10 +278,12 @@ input[type="checkbox"]:checked:after {
 .total > .payment-method {
     display: flex;
     flex-direction: column;
-    margin-right: 11rem; 
+    gap: 3px;
+    margin-right: 9rem; 
 }
 
 .total > .payment-method > input {
+  
     margin-right: 6rem; 
 }
 
