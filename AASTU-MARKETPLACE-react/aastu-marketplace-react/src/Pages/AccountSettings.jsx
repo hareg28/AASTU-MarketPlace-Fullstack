@@ -9,7 +9,7 @@ const AccountSettings = () => {
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <meta
         name="description"
-        content="Contact us page of the ASTU marketplace"
+        content="Account settings page of the ASTU marketplace"
       />
       <meta name="author" content="Team 1 Section B AASTU students" />
       <meta name="robots" content="index, follow" />
@@ -18,7 +18,7 @@ const AccountSettings = () => {
         <span>Home /</span>
         <h4 style={{ display: "inline" }}>My Account</h4>
       </div>
-      <div className="account-settings-content-container">
+      <div className="content-container">
         <section className="account-settings-section-1">
           <ul>
             <h3>Manage My Account</h3>
@@ -37,31 +37,33 @@ const AccountSettings = () => {
             <li>
               <a href="#">My Connections</a>
             </li>
-            <h3>My wishlist</h3>
+            <h3>My Wishlist</h3>
           </ul>
         </section>
         <section className="account-settings-section-2">
-          <form className="account-settings-form">
+          <form>
             <span>
               <label>
-                <h2 className="account-settings-Edit">Edit your profile</h2>
+                <h2 className="account-settings-edit-title">
+                  Edit your profile
+                </h2>
                 <br />
                 First Name
                 <br />
                 <input
                   required
-                  className="account-settings-Name"
+                  className="account-settings-input"
                   type="text"
                   name="fname"
                   placeholder="Your Name *"
                 />
               </label>
-              <label className="account-settings-lastName">
+              <label className="account-settings-last-name">
                 Last Name
                 <br />
                 <input
                   required
-                  className="account-settings-Name"
+                  className="account-settings-input"
                   type="text"
                   name="lname"
                   placeholder="Your Last Name *"
@@ -71,7 +73,7 @@ const AccountSettings = () => {
                 Email
                 <br />
                 <input
-                  className="account-settings-Email"
+                  className="account-settings-email"
                   type="email"
                   name="EmailAddress"
                   placeholder="Your Email *"
@@ -80,11 +82,11 @@ const AccountSettings = () => {
                   title="Please enter a valid email address (e.g., example@domain.com)"
                 />
               </label>
-              <label className="account-settings-Address">
+              <label className="account-settings-address">
                 Address
                 <br />
                 <input
-                  className="account-settings-Email"
+                  className="account-settings-email"
                   type="text"
                   name="Address"
                   placeholder="Koye, AASTU, Addis Abeba"
@@ -92,7 +94,7 @@ const AccountSettings = () => {
                 />
               </label>
             </span>
-            <div className="account-settings-password-changes">
+            <div className="password-changes">
               <div className="form-group">
                 <h4>Password Changes</h4>
                 <input
@@ -134,7 +136,7 @@ const AccountSettings = () => {
               </button>
               <div>
                 <button className="account-settings-send-btn" type="submit">
-                  Send Message
+                  Save Changes
                 </button>
               </div>
             </div>
