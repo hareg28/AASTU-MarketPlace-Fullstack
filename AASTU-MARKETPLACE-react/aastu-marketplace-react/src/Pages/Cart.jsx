@@ -161,7 +161,7 @@ const Cart = () => {
                         <div className="product-list selected">
                             {cartData.map((item) => (
                                 <div key={item.product_id} className="cart-item-row">
-                                    <div className="item items" data-label="Product">
+                                    <div className="item-row items" data-label="Product">
                                         <img className="img1" src={item.image} alt={item.name}/>
                                         <p>{item.name}</p>
                                     </div>

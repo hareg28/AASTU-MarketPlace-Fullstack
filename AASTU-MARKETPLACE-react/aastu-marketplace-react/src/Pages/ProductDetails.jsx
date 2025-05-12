@@ -35,7 +35,7 @@ const ProductDetails = () => {
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const response = await fetch(`http://localhost/backend/getProduct.php?id=6`);
+        const response = await fetch(`http://localhost/backend/getProduct.php?id=${id}`);
         const data = await response.json();
         setProduct(data);
       } catch (error) {
@@ -49,7 +49,7 @@ const ProductDetails = () => {
   }, [id]);
 
   useEffect(() => {
-    if (product && product.category_id) {
+    if (product && product.category) {
       fetchRelatedProducts(pagination.currentPage);
     }
   }, [product, pagination.currentPage]);
@@ -58,7 +58,7 @@ const ProductDetails = () => {
     setLoadingRelated(true);
     try {
       const response = await fetch(
-        `http://localhost/backend/getRelatedProducts.php?category=${product.category_id}&exclude_id=${id}&page=${page}&limit=${pagination.itemsPerPage}`
+        `http://localhost/backend/getRelatedProducts.php?category=${product.category}&exclude_id=${id}&page=${page}&limit=${pagination.itemsPerPage}`
       );
       const data = await response.json();
       
@@ -81,12 +81,33 @@ const ProductDetails = () => {
     }
   };
 
-  const handleAddToCart = async () => {
-    if (product) {
-      // Get the quantity from the input field
-      const quantityInput = document.querySelector('.spin');
-      const quantity = quantityInput ? parseInt(quantityInput.value) || 1 : 1;
+ const handleAddToCart = async () => {
+  if (product) {
+    // Get the quantity from the input field
+    const quantityInput = document.querySelector('.spin');
+    const quantity = quantityInput ? parseInt(quantityInput.value) || 1 : 1;
+    
+    //check stock availability
+    try {
+      // Fetch current product stock from backend
+      const stockCheckResponse = await fetch(`http://localhost/backend/checkQuantity.php?product_id=${product.id}`);
+      const stockResult = await stockCheckResponse.json();
       
+      if (!stockCheckResponse.ok || !stockResult.success) {
+        throw new Error('Failed to check product stock');
+      }
+      
+      const availableStock = stockResult.stock;
+      
+      if (quantity > availableStock) {
+        showToast({
+          message: `Only ${availableStock} items available in stock!`,
+          type: 'error'
+        });
+        return; // Exit the function if not enough stock
+      }
+      
+      // Proceed with adding to cart since stock is available
       const cartItem = {
         product_id: product.id,
         name: product.name,
@@ -95,7 +116,7 @@ const ProductDetails = () => {
         image: product.image_url,
         subtotal: product.price * quantity
       };
-    try {
+      
       // Send to PHP backend
       const response = await fetch('http://localhost/backend/addToCart.php', {
         method: 'POST',
@@ -116,16 +137,19 @@ const ProductDetails = () => {
         });
       } else {
         showToast({
-          message: 'error adding to cart!',
+          message: result.message || 'Error adding to cart!',
           type: 'error'
         });
       }
     } catch (error) {
-      console.error('Error adding to cart:', error);
-      alert('Error adding to cart. Please try again.');
+      console.error('Error:', error);
+      showToast({
+        message: 'Error processing your request. Please try again.',
+        type: 'error'
+      });
     }
   }
-  };
+};
  
 
   if (loading) return (
