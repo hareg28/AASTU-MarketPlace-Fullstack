@@ -113,9 +113,7 @@ console.log(orderData);
           items: cartItems
         });
         setOrderSuccess(true);
-        // You could redirect to a success page here:
-
-        // navigate('/order-success', { state: { orderId: data.order_id } });
+       
 
       } else {
         setErrors(data.errors || { general: "Failed to place order" });
@@ -255,7 +253,7 @@ console.log(orderData);
       };
   if (orderSuccess) {
     return (
-      <div className="order-success">
+      <div className="order-success ">
         <h2>Order Confirmed!</h2>
         <p>Thank you for your purchase.</p>
         <div className="order-details">

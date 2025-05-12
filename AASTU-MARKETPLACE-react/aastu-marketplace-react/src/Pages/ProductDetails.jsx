@@ -4,7 +4,9 @@ import { useParams } from 'react-router-dom';
 import { useCart } from "../Components/CartContext";
 import "../CSS/Productdetails.css";
 import "remixicon/fonts/remixicon.css";
-
+import DeliveryInfo from "../Components/DeliveryInfo";
+import showToast from "../Components/showToast";  
+import StarRating from "../Components/StarRating";
 
 import img57 from "../Assets/image 57.png";
 import img58 from "../Assets/image 58.png";
@@ -33,7 +35,7 @@ const ProductDetails = () => {
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const response = await fetch(`http://localhost/backend/getProduct.php?id=4`);
+        const response = await fetch(`http://localhost/backend/getProduct.php?id=6`);
         const data = await response.json();
         setProduct(data);
       } catch (error) {
@@ -56,7 +58,7 @@ const ProductDetails = () => {
     setLoadingRelated(true);
     try {
       const response = await fetch(
-        `http://localhost/backend/getRelatedProducts.php?category_id=${product.category_id}&exclude_id=${id}&page=${page}&limit=${pagination.itemsPerPage}`
+        `http://localhost/backend/getRelatedProducts.php?category=${product.category_id}&exclude_id=${id}&page=${page}&limit=${pagination.itemsPerPage}`
       );
       const data = await response.json();
       
@@ -79,19 +81,52 @@ const ProductDetails = () => {
     }
   };
 
-  const handleAddToCart = (productToAdd, quantity = 1) => {
-    const cartItem = {
-      product_id: productToAdd.id,
-      name: productToAdd.name,
-      price: productToAdd.price,
-      quantity: quantity,
-      image: productToAdd.image_url,
-      subtotal: productToAdd.price * quantity
-    };
+  const handleAddToCart = async () => {
+    if (product) {
+      // Get the quantity from the input field
+      const quantityInput = document.querySelector('.spin');
+      const quantity = quantityInput ? parseInt(quantityInput.value) || 1 : 1;
+      
+      const cartItem = {
+        product_id: product.id,
+        name: product.name,
+        price: product.price,
+        quantity: quantity,
+        image: product.image_url,
+        subtotal: product.price * quantity
+      };
+    try {
+      // Send to PHP backend
+      const response = await fetch('http://localhost/backend/addToCart.php', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(cartItem)
+      });
 
-    addToCart(cartItem);
-    alert(`${productToAdd.name} has been added to your cart!`);
+      const result = await response.json();
+      
+      if (result.success) {
+        // Also add to local cart context
+        addToCart(cartItem);
+        showToast({
+          message: 'Item added to cart!',
+          type: 'success'
+        });
+      } else {
+        showToast({
+          message: 'error adding to cart!',
+          type: 'error'
+        });
+      }
+    } catch (error) {
+      console.error('Error adding to cart:', error);
+      alert('Error adding to cart. Please try again.');
+    }
+  }
   };
+ 
 
   if (loading) return (
     <div className="loading-container">
@@ -125,31 +160,51 @@ const ProductDetails = () => {
          <div className="discription">
            <h3>{product.name}</h3>
            <span className="head"></span>
-           <span className="fa fa-star checked"></span>
-           <span className="fa fa-star checked"></span>
-           <span className="fa fa-star checked"></span>
-           <span className="fa fa-star checked"></span>
-           <span className="fa fa-star">(150 reviews)</span>
+           <StarRating initialRating={4} reviewCount={150} />
            <h4>{product.price}</h4>
            <p>
              {product.description}
            </p>
 
-           <div className="choice">
-             <label htmlFor="">Colour: </label>
-             <input id="blue" type="radio" name="choose" />
-             <label htmlFor="red">red</label>
-             <input id="red" type="radio" name="choose" />
-             <label htmlFor="blue">blue</label>
-           </div>
-           <div className="size">
-             <label htmlFor="">Size:</label>
-             <input className="space" type="button" value="XS" />
-             <input className="space" type="button" value="S" />
-             <input className="space" type="button" value="M" />
-             <input className="space" type="button" value="L" />
-             <input className="space" type="button" value="XL" />
-           </div>
+           <div className="color-choice-container">
+  <span className="choice-label">Colour:</span>
+  
+  <div className="radio-option">
+    <input 
+      id="red" 
+      type="radio" 
+      name="color-choose" 
+      className="color-radio"
+    />
+    <label htmlFor="red" className="radio-label">
+      <span className="radio-button"></span>
+      <span className="radio-text">Red</span>
+    </label>
+  </div>
+  
+  <div className="radio-option">
+    <input 
+      id="blue" 
+      type="radio" 
+      name="color-choose" 
+      className="color-radio"
+    />
+    <label htmlFor="blue" className="radio-label">
+      <span className="radio-button"></span>
+      <span className="radio-text">Blue</span>
+    </label>
+  </div>
+</div>
+           {product.category === 'clothes' && (
+        <div className="size">
+          <label htmlFor="">Size:</label>
+          <input className="space" type="button" value="XS" />
+          <input className="space" type="button" value="S" />
+          <input className="space" type="button" value="M" />
+          <input className="space" type="button" value="L" />
+          <input className="space" type="button" value="XL" />
+        </div>
+      )}
            <input className="spin" type="number" min="1" max="20" required />
            <button 
              className="addcart"
@@ -159,23 +214,9 @@ const ProductDetails = () => {
              onClick={handleAddToCart}
            >Add to Cart</button>
 
-           <div className="delivery" id="delivery">
-             <p>Free Delivery</p>
-             <a href="#" id="check-delivery-link">
-               Enter your postal code for delivery avalaibility
-             </a>
-             <div id="postal-code-container" style={{ display: "none" }}>
-               <input
-                 type="text"
-                 id="postal-code"
-                 placeholder="Enter your postal code"
-               />
-               <button id="check-delivery-btn">Check Delivery</button>
-             </div>
-             <p id="delivery-message" style={{ color: "green" }}></p>
-           </div>
+           <DeliveryInfo />
          </div>
-        <div className="items">
+        <div className="items-details">
           <h4 className="related">Related items</h4>
 
           {loadingRelated ? (
@@ -204,17 +245,12 @@ const ProductDetails = () => {
                     <div className="content">
                       <p>{relatedProduct.name}</p>
                       <h5>
-                        ${relatedProduct.price}
+                        {relatedProduct.price} ETB
                         {relatedProduct.original_price && (
-                          <del>${relatedProduct.original_price}</del>
+                          <del>${relatedProduct.original_price} ETB</del>
                         )}
                       </h5>
-                      <span className="head"></span>
-                      <span className="fa fa-star checked"></span>
-                      <span className="fa fa-star checked"></span>
-                      <span className="fa fa-star checked"></span>
-                      <span className="fa fa-star checked"></span>
-                      <span className="fa fa-star"></span>
+                      <StarRating initialRating={4} reviewCount={130} />
                     </div>
                   </div>
                 ))}

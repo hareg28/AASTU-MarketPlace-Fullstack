@@ -69,7 +69,7 @@ const Cart = () => {
                         : item
                 );
                 setCartData(updatedCart);
-                updateCartItem(productId, newQuantity);
+                updateCartItem(productId);
             }
         } catch (error) {
             console.error('Error updating quantity:', error);
@@ -115,7 +115,11 @@ const Cart = () => {
             });
             const result = await response.json();
             if (result.success) {
-                alert('Cart updated successfully!');
+               
+                showToast({
+          message: 'Cart updated successfully!',
+          type: 'success'
+        });
             }
         } catch (error) {
             console.error('Error updating cart:', error);
@@ -152,19 +156,19 @@ const Cart = () => {
                             <div className="sub-total"><p>Subtotal</p></div>
                             <div className="action"><p>Action</p></div>
                         </div>
-                        {console.log(cartData)};
+                        
 
                         <div className="product-list selected">
                             {cartData.map((item) => (
                                 <div key={item.product_id} className="cart-item-row">
-                                    <div className="item items">
+                                    <div className="item items" data-label="Product">
                                         <img className="img1" src={item.image} alt={item.name}/>
                                         <p>{item.name}</p>
                                     </div>
-                                    <div className="items">
-                                        <p>${item.price}</p>
+                                    <div className="items" data-label="Price">
+                                        <p>{item.price} ETB</p>
                                     </div>
-                                    <div className="items">
+                                    <div className="items" data-label="Quantity">
                                         <input 
                                             className="spin" 
                                             type="number" 
@@ -175,10 +179,10 @@ const Cart = () => {
                                             required
                                         />
                                     </div>
-                                    <div className="items">
-                                        <p>${(item.price * item.quantity)}</p>
+                                    <div className="items" data-label="Subtotal">
+                                        <p>{(item.price * item.quantity)}ETB</p>
                                     </div>
-                                    <div className="items cart-buttons">
+                                    <div className="items " data-label="Action">
                                         <button 
                                             onClick={() => handleRemoveItem(item.product_id)}
                                             className="remove-button"
@@ -209,7 +213,7 @@ const Cart = () => {
                             <h6>Cart Total</h6>
                             <div className="data">
                                 <p>Subtotal:</p>
-                                <p>${total}</p>
+                                <p>{total} ETB</p>
                             </div>
                             <div className="data">
                                 <p>Shipping:</p>
@@ -217,7 +221,7 @@ const Cart = () => {
                             </div>
                             <div className="data" id="total">
                                 <p>Total:</p>
-                                <p>${total}</p>
+                                <p>{total} ETB</p>
                             </div>
                             <div className="Checkout" id="Checkout">
                                 <button onClick={handleProceedToCheckout}>Proceed to Checkout</button>
