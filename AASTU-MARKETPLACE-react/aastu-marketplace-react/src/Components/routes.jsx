@@ -6,8 +6,13 @@ import Page404 from "../Pages/Page404";
 import AccountSettings from "../Pages/AccountSettings";
 
 
+
 import Wishlist from "../Pages/Wishlist";
 import About from "../Pages/About";
+
+
+import { Registration } from "../Pages/Registration";
+import Login from "../Pages/login";
 
 
 import { Registration } from "../Pages/Registration";
@@ -19,9 +24,16 @@ const routes = createBrowserRouter([
     element: <Layout />,
     children: [
 
+
       { path: "/contacus", element: <Contactus /> },
       { path: "/home", element: <Home /> },
     { path: "contacus", element: <Contactus /> },
+      { path: "accountsettings", element: <AccountSettings /> },
+      { path: "signup", element: <Registration /> },
+      { path: "login", element: <Login /> },
+
+
+      { path: "contacus", element: <Contactus /> },
       { path: "accountsettings", element: <AccountSettings /> },
       { path: "signup", element: <Registration /> },
       { path: "login", element: <Login /> },
@@ -36,4 +48,3 @@ const routes = createBrowserRouter([
   },
 ]);
 export default routes;
-// 
