@@ -1,44 +1,58 @@
-import React from "react";
-import item from "../../Assets/product-1.png";
-import star from "../../Assets/Vector.png";
+import React, { useEffect, useState } from "react";
 import heart from "../../Assets/heart.svg";
 import eye from "../../Assets/eye.svg";
 import profile from "../../Assets/Profile.png";
 
 const ItemSales = () => {
+  const [items, setItems] = useState([]);
+
+  useEffect(() => {
+    const fetchItems = async () => {
+      const { data, error } = await supabase
+        .from("itemdetail")
+        .select("*")
+        .order("itemId", { ascending: false });
+
+      if (error) {
+        console.error("Fetch error:", error);
+      } else {
+        setItems(data);
+      }
+    };
+
+    fetchItems();
+  }, []);
+
   return (
     <section className="item-sales">
-      {/* Product Cards */}
-      {[...Array(5)].map((_, index) => (
-        <div className="product-card" key={index}>
-          <div className="product-image">
-            <div className="icons">
-              <span className="icon-heart">
-                <img src={heart} alt="Heart Icon" />
-              </span>
-              <span className="icon-eye">
-                <img src={eye} alt="Eye Icon" />
-              </span>
+      {items.map((item) => (
+        <div className="item-card" key={item.itemId}>
+          <div className="item-upper">
+            <div className="item-image">
+              <div className="icons">
+                <span className="icon-heart">
+                  <img src={heart} alt="Heart Icon" />
+                </span>
+                <span className="icon-eye">
+                  <img src={eye} alt="Eye Icon" />
+                </span>
+              </div>
+              <img
+                className="item-img"
+                src={`http://localhost/aastu-marketplace/uploads/${item.itemProfile}`}
+                alt="product"
+              />
             </div>
           </div>
-          <img
-            className="product-img"
-            src={item}
-            alt={`Product ${index + 1}`}
-          />
-          <div className="product-detail">
+          <div className="item-detail">
             <img src={profile} alt="customer-profile" width={50} height={50} />
             <div className="customer-profile">
               <div className="profile">
-                <h5>Product Name</h5>
+                <h5>{item.itemName}</h5>
                 <p>AASTU Electronics</p>
-                <div className="rating">
-                  {[...Array(5)].map((_, i) => (
-                    <img src={star} alt="Star" key={i} />
-                  ))}
-                </div>
+                <div className="rating">{item.itemRate}</div>
               </div>
-              <p>$25.98</p>
+              <p>{item.itemPrice} ETB</p>
             </div>
           </div>
         </div>

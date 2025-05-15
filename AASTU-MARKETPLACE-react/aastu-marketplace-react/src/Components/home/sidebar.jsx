@@ -4,15 +4,15 @@ const Sidebar = () => {
   return (
     <div className="sidebar">
       <ul>
-        <li>Woman's Fashion</li>
-        <li>Men's Fashion</li>
-        <li>Electronics</li>
-        <li>Home &amp; Lifestyle</li>
-        <li>Medicine</li>
-        <li>Sports &amp; Outdoor</li>
-        <li>Baby's &amp; Toys</li>
-        <li>Groceries &amp; Pets</li>
-        <li>Health &amp; Beauty</li>
+        <b>Woman's Fashion</b>
+        <b>Men's Fashion</b>
+        <b>Electronics</b>
+        <b>Home &amp; Bfestyle</b>
+        <b>Medicine</b>
+        <b>Sports &amp; Outdoor</b>
+        <b>Baby's &amp; Toys</b>
+        <b>Groceries &amp; Pets</b>
+        <b>Health &amp; Beauty</b>
       </ul>
     </div>
   );

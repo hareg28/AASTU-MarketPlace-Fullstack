@@ -7,6 +7,7 @@ import Home from "../Pages/Home";
 
 import Page404 from "../Pages/Page404";
 import AccountSettings from "../Pages/AccountSettings";
+
 import Cart from "../Pages/Cart";
 import Checkout from "../Pages/Checkout"; 
 import ProductDetails from "../Pages/ProductDetails";
@@ -15,8 +16,11 @@ import { CartProvider } from "./CartContext";
 
 
 
+
 import Wishlist from "../Pages/Wishlist";
 import About from "../Pages/About";
+import Profile from "../Pages/Profile";
+
 
 
 import { Registration } from "../Pages/Registration";
@@ -25,21 +29,19 @@ import Login from "../Pages/login";
 
 
 
+
+
 const routes = createBrowserRouter([
   {
-    
-
+    path: "/",
     element: (
       <CartProvider>
       <Layout />
       </CartProvider>
     ),
-    children: [ 
-
-      { path: "accountsettings", element: <AccountSettings /> },
-      { path: "signup", element: <Registration /> },
-      { path: "login", element: <Login /> },
-
+    children: [
+      { path: "/contacus", element: <Contactus /> },
+      { path: "/", element: <Home /> },
 
       { path: "contacus", element: <Contactus /> },
       { path: "accountsettings", element: <AccountSettings /> },
@@ -51,6 +53,7 @@ const routes = createBrowserRouter([
       
       { path: "/wishlist", element: <Wishlist /> },
       { path: "/about", element: <About /> },
+      { path: "/profile", element: <Profile /> },
 
       
 
@@ -62,3 +65,4 @@ const routes = createBrowserRouter([
   },
 ]);
 export default routes;
+

@@ -6,52 +6,76 @@
   font-family: "Poppins";
 }
 
-main {
+/* main {
   padding: 0 5%;
-}
-/* TRy */
+} */
+
+/* Layout Containers */
 .container {
   display: flex;
+  align-items: flex-start;
+  justify-content: end;
+  background-color: #fff;
+  text-align: left;
+  margin-bottom: 50px;
 }
 
 .home {
-  display: flex;
+  /* display: flex; */
   justify-content: space-between;
   align-items: start;
   padding: 20px;
-  background-color: #f9f9f9;
+  /* background-color: #f9f9f9; */
   gap: 2em;
 }
+
+.home-upper {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 20px;
+}
 .sidebar {
-  width: 20%;
-  background-color: #f9f9f9;
+  width: 15%;
+  /* background-color: #f9f9f9; */
   padding: 20px;
 }
 
 .sidebar ul {
   list-style: none;
   padding: 0;
+  display: flex;
+  gap: 5px;
+  flex-wrap: wrap;
 }
 
 .sidebar ul li {
-  margin-bottom: 15px;
-  font-size: 16px;
+  font-size: 14px;
+  margin-bottom: 10px;
+  /* background-color: #e9e7e7; */
+  border-radius: 15px;
+  padding: auto;
   cursor: pointer;
+  width: fit-content;
 }
 
+/* Banner */
 .banner {
-  width: 80%;
+  width: 100%;
   background-color: #000;
   color: #fff;
   position: relative;
   display: flex;
+  flex-direction: column;
   align-items: center;
+  text-align: center;
   padding: 20px;
 }
 
 .banner-content {
-  flex: 1;
-  padding-right: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0;
 }
 
 .logo {
@@ -61,11 +85,11 @@ main {
 
 .banner h2 {
   margin: 10px 0;
-  font-size: 24px;
+  font-size: 20px;
 }
 
 .discount {
-  font-size: 20px;
+  font-size: 18px;
   font-weight: bold;
   margin: 10px 0;
 }
@@ -86,121 +110,51 @@ main {
 }
 
 .banner-image {
-  width: 40%;
-  max-width: 400px;
-}
-
-.dots {
-  margin-top: 20px;
-}
-
-.dots span {
-  display: inline-block;
-  width: 10px;
-  height: 10px;
-  background-color: #ccc;
-  border-radius: 50%;
-  margin: 0 5px;
-  cursor: pointer;
-}
-
-.dots .active {
-  background-color: #fff;
-}
-
-.banner {
-  width: 100%;
-  flex-direction: column;
-  text-align: center;
-}
-
-.banner-content {
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.banner h2 {
-  font-size: 20px;
-}
-
-.discount {
-  font-size: 18px;
-}
-
-.banner-image {
   width: 80%;
   max-width: 200px;
   margin-top: 20px;
 }
 
-@media (max-width: 480px) {
-  .shop-now {
-    padding: 8px 15px;
-    font-size: 14px;
-  }
-
-  .dots span {
-    width: 8px;
-    height: 8px;
-    margin: 0 3px;
-  }
-}
-
-/* --------------------------------------- Flash Sales ------------------------------------------ */
-
+/* Flash Sales */
 .item-sales {
   display: flex;
   justify-content: space-evenly;
   flex-wrap: wrap;
   text-align: center;
-  /* margin: 150px; */
 }
 
-.product-card {
-  background-color: white;
+.item-card {
   width: 307px;
   margin: 10px;
   position: relative;
 }
-.product-image {
+
+.item-upper {
+  background-color: white;
+  height: 250px;
+}
+
+.item-image {
   position: relative;
 }
 
-.product-image img {
+.item-image img {
   width: 100%;
   border-radius: 10px;
 }
 
-.icons {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-}
-
-.icons .icon-heart,
-.icons .icon-eye {
-  background-color: white;
-  padding: 8px;
-  border-radius: 50%;
-  cursor: pointer;
-}
-
-.product-img {
-  width: 100%;
+.item-img {
+  width: 80%;
   border-radius: 5px;
 }
-.product-detail {
+
+.item-detail {
   padding: 10px;
   display: flex;
   gap: 1em;
 }
 
-.product-detail img {
+.item-detail img {
   max-height: 100%;
 }
 
@@ -213,48 +167,40 @@ main {
 }
 
 .profile {
-  align-content: start;
   text-align: start;
 }
+
 .profile h5 {
   font-size: 16px;
   font-weight: 600;
   margin-bottom: 3px;
 }
+
 .profile p {
   font-size: 14px;
   font-weight: 400;
   margin-bottom: 3px;
 }
 
+/* Icon Styling */
 .icons {
-  /* position: relative; */
+  position: absolute;
   top: 10px;
   right: 10px;
   display: flex;
   flex-direction: column;
   gap: 5px;
-  float: right;
 }
 
 .icons .icon-heart,
 .icons .icon-eye {
-  background-color: white;
+  /* background: white 0.5%; */
   padding: 10px;
   border-radius: 50%;
   cursor: pointer;
 }
-/* --------------------------------------- Categories ------------------------------------------ */
 
-.container {
-  display: flex;
-  align-items: LEFT;
-  justify-content: end;
-  background-color: #fff;
-  text-align: left;
-  margin-bottom: 50px;
-}
-
+/* Categories Header */
 .header-mini {
   display: flex;
   align-items: center;
@@ -264,7 +210,7 @@ main {
 .indicator {
   width: 10px;
   height: 30px;
-  background-color: #003f6b; /* Navy color */
+  background-color: #003f6b;
   margin-right: 10px;
   border-radius: 4px;
 }
@@ -277,14 +223,15 @@ main {
 
 .heading {
   flex-grow: 1;
-  text-align: left;
+  text-align: center;
   font-size: 18px;
   font-weight: bold;
-  margin: 0 20px;
   background-color: #fff;
   width: fit-content;
+  margin: 0;
 }
 
+/* View All Button */
 .view-all-btn {
   padding: 8px 25px;
   background-color: #003f6b;
@@ -294,31 +241,22 @@ main {
   font-size: 14px;
   cursor: pointer;
   transition: background-color 0.3s;
-  /* margin-top: 20px; */
+  align-self: flex-end;
 }
 
 .view-all-btn:hover {
   background-color: #005f9e;
 }
 
-.heading {
-  text-align: center;
-  margin: 0;
-}
-
-.view-all-btn {
-  align-self: flex-end;
-}
-
+/* Middle Banner */
 .banner-2 {
   background-color: #000;
   color: #fff;
-  width: 80%;
+  width: 90%;
   margin-left: 5%;
   text-align: center;
   position: relative;
   padding: 5% 10%;
-  width: 90%;
   margin-bottom: 50px;
 }
 
@@ -327,6 +265,7 @@ main {
   align-items: center;
   justify-content: space-around;
 }
+
 .banner-2 img {
   width: 100%;
   max-width: 400px;
@@ -348,7 +287,8 @@ main {
     padding: 0px;
   }
 
-  main img {
+  main img,
+  .item-img {
     width: auto;
   }
 
@@ -357,28 +297,24 @@ main {
     align-items: flex-start;
     gap: 10px;
   }
-  .product-img {
-    width: auto;
-  }
 
   .sidebar {
     width: 100%;
     text-align: center;
     padding: 10px;
   }
-  .sidebar ul {
-    display: flex;
-    width: fit-content;
-    gap: 5px;
-    flex-wrap: wrap;
-  }
-  .sidebar ul li {
+}
+
+@media (max-width: 480px) {
+  .shop-now {
+    padding: 8px 15px;
     font-size: 14px;
-    margin-bottom: 10px;
-    background-color: #e9e7e7;
-    border-radius: 15px;
-    width: fit-content;
-    padding: auto;
+  }
+
+  .dots span {
+    width: 8px;
+    height: 8px;
+    margin: 0 3px;
   }
 }
 
@@ -388,7 +324,29 @@ main {
     display: none;
   }
 
-  .product-img {
+  .item-img {
     width: auto;
   }
+}
+
+/* Add this in your main CSS file or import it into the component */
+
+.floating-post-btn {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 15px 25px;
+  border-radius: 50px;
+  font-size: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+  z-index: 999;
+  transition: background-color 0.3s ease;
+}
+
+.floating-post-btn:hover {
+  background-color: #0056b3;
 }
