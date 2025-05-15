@@ -15,8 +15,7 @@ import { Registration } from "../Pages/Registration";
 import Login from "../Pages/login";
 
 
-import { Registration } from "../Pages/Registration";
-import Login from "../Pages/login";
+
 
 const routes = createBrowserRouter([
   {
