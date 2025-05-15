@@ -54,12 +54,7 @@ body {
     border-radius: 0.2rem;
     cursor: pointer;
 }
-<<<<<<< HEAD
-.items {
-    position: relative;
-}
 
-=======
 .items-details {
     position: relative;
 }
@@ -97,7 +92,7 @@ body {
   }
 
 
->>>>>>> product
+
 .item {
     position: relative;
     display: inline-block; /* Ensure items are inline */

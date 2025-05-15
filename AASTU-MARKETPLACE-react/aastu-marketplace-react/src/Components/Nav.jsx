@@ -73,9 +73,7 @@ const Nav = () => {
               <img src={wishlistIcon} alt="Go to Wishlist" />
             </a>
 
-            <a href="/Cart Page/index.html">
-              <Link to ="/cart"> <img src={cartIcon} alt="View Cart" /></Link>
-            </a>
+           
 
            <Link to ="/cart">
               <img src={cartIcon} alt="View Cart" />
