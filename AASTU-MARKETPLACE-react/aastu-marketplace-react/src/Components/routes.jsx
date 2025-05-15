@@ -11,6 +11,8 @@ import Wishlist from "../Pages/Wishlist";
 import About from "../Pages/About";
 import Profile from "../Pages/Profile";
 
+import { Registration } from "../Pages/Registration";
+import Login from "../Pages/login";
 const routes = createBrowserRouter([
   {
     path: "/",
@@ -18,6 +20,10 @@ const routes = createBrowserRouter([
     children: [
       { path: "/contacus", element: <Contactus /> },
       { path: "/", element: <Home /> },
+      { path: "contacus", element: <Contactus /> },
+      { path: "accountsettings", element: <AccountSettings /> },
+      { path: "signup", element: <Registration /> },
+      { path: "login", element: <Login /> },
       { path: "*", element: <Page404 /> },
       { path: "productdetails", element: <ProductDetails /> },
       { path: "checkout", element: <Checkout /> },
