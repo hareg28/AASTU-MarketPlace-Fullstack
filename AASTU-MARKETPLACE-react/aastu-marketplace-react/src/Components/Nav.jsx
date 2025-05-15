@@ -19,7 +19,7 @@ const Nav = () => {
   };
   return (
     <div>
-      <title>Header/Footer</title>
+      <title>AASTUMarketPlace</title>
       <meta charSet="UTF-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <meta name="author" content="Team 1 Section B AASTU students" />
@@ -72,9 +72,15 @@ const Nav = () => {
             <a href="/WishList Page/wishlist.html">
               <img src={wishlistIcon} alt="Go to Wishlist" />
             </a>
+
             <a href="/Cart Page/index.html">
               <Link to ="/cart"> <img src={cartIcon} alt="View Cart" /></Link>
             </a>
+
+           <Link to ="/cart">
+              <img src={cartIcon} alt="View Cart" />
+            </Link>
+
             <div
               className="dropdown-container"
               onMouseEnter={handleMouseEnter}
