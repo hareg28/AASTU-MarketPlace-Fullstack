@@ -4,9 +4,9 @@ import Contactus from "../Pages/Contactus";
 import Home from "../Pages/Home";
 import Page404 from "../Pages/Page404";
 import AccountSettings from "../Pages/AccountSettings";
-import ProductDetails from "../Pages/ProductDetails";
-import Checkout from "../Pages/Checkout";
-import Cart from "../Pages/Cart";
+
+
+
 import Wishlist from "../Pages/Wishlist";
 import About from "../Pages/About";
 import Profile from "../Pages/Profile";
