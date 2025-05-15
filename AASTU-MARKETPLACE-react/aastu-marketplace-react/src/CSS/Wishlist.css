@@ -7,9 +7,7 @@
   /* border: 1px solid red; */
 }
 
-body {
-  padding: 0px 25px;
-}
+
 .heading {
   display: flex;
   align-items: center;

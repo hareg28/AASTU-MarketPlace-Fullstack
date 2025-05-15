@@ -15,16 +15,13 @@ import { CartProvider } from "./CartContext";
 
 
 
-
-
 import Wishlist from "../Pages/Wishlist";
 import About from "../Pages/About";
 import Profile from "../Pages/Profile";
 
 
 
-import { Registration } from "../Pages/Registration";
-import Login from "../Pages/login";
+
 
 
 
@@ -45,8 +42,8 @@ const routes = createBrowserRouter([
 
       { path: "contacus", element: <Contactus /> },
       { path: "accountsettings", element: <AccountSettings /> },
-      { path: "signup", element: <Registration /> },
-      { path: "login", element: <Login /> },
+      { path: "signup", element: <test /> },
+      // { path: "login", element: <Login /> },
 
       { path: "*", element: <Page404 /> },
 
