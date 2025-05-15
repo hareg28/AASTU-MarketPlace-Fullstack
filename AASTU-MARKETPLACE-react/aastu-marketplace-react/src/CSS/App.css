@@ -14,3 +14,42 @@ footer {
   padding: 20px;
   text-align: center;
 }
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.animate-in > * {
+  animation: fadeIn 0.5s;
+}
+
+.animate-in > * > * {
+  animation: fadeIn 0.5s;
+}
+
+.animate-in > * > * > * {
+  animation: fadeIn 0.5s;
+}
+
+.fade-enter {
+  opacity: 0;
+}
+
+.fade-enter-active {
+  opacity: 1;
+  transition: opacity 500ms ease-in;
+}
+
+.fade-exit {
+  opacity: 1;
+}
+
+.fade-exit-active {
+  opacity: 0;
+  transition: opacity 300ms ease-out;
+}
