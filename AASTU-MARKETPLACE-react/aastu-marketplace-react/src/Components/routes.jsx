@@ -6,7 +6,7 @@ import HomeBuyer from "../Pages/HomeBuyer";
 import Page404 from "../Pages/Page404";
 import AccountSettings from "../Pages/AccountSettings";
 import Cart from "../Pages/Cart";
-import Checkout from "../Pages/Checkout"; 
+import Checkout from "../Pages/Checkout";
 import ProductDetails from "../Pages/ProductDetails";
 import { CartProvider } from "./CartContext";
 import Wishlist from "../Pages/Wishlist";
@@ -15,13 +15,16 @@ import Profile from "../Pages/Profile";
 import { Registration } from "../Pages/Registration";
 import LoginPage from "../Pages/login";
 import AdminDashboard from "../Pages/AdminDashboard";
+import { AuthProvider } from "./AuthContext";
 const routes = createBrowserRouter([
   {
     path: "/",
     element: (
-      <CartProvider>
-        <Layout />
-      </CartProvider>
+      <AuthProvider>
+        <CartProvider>
+          <Layout />
+        </CartProvider>
+      </AuthProvider>
     ),
     children: [
       { path: "/contacus", element: <Contactus /> },
@@ -44,4 +47,3 @@ const routes = createBrowserRouter([
   },
 ]);
 export default routes;
-

@@ -125,7 +125,7 @@ const LoginPage = () => {
               </a>
             </div>
 
-            <div className="loginPage-remember-me">
+            {/* <div className="loginPage-remember-me">
               <input
                 type="checkbox"
                 id="remember"
@@ -134,7 +134,7 @@ const LoginPage = () => {
               <label htmlFor="remember" className="loginPage-remember-label">
                 Remember me
               </label>
-            </div>
+            </div> */}
 
             <button
               type="submit"
