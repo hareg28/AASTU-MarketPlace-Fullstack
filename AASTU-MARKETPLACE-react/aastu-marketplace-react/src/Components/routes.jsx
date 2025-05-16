@@ -1,7 +1,8 @@
 import { createBrowserRouter } from "react-router-dom";
 import Layout from "./Layout";
 import Contactus from "../Pages/Contactus";
-import Home from "../Pages/Home";
+import HomeSaller from "../Pages/HomeSaller";
+import HomeBuyer from "../Pages/HomeBuyer";
 import Page404 from "../Pages/Page404";
 import AccountSettings from "../Pages/AccountSettings";
 import Cart from "../Pages/Cart";
@@ -24,7 +25,7 @@ const routes = createBrowserRouter([
     ),
     children: [
       { path: "/contacus", element: <Contactus /> },
-      { path: "/", element: <Home /> },
+      { path: "/", element: <HomeBuyer /> },
       { path: "contacus", element: <Contactus /> },
       { path: "accountsettings", element: <AccountSettings /> },
       { path: "signup", element: <Registration /> },
