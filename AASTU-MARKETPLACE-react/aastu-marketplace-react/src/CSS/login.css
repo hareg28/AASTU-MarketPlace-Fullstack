@@ -310,3 +310,20 @@
     font-size: 1rem;
   }
 }
+.loginPage-error-message {
+  color: #e74c3c;
+  background-color: #fdecea;
+  padding: 10px 15px;
+  border-radius: 4px;
+  margin-bottom: 20px;
+  border: 1px solid #f5c6cb;
+}
+
+.loginPage-submit-btn:disabled {
+  background-color: #95a5a6;
+  cursor: not-allowed;
+}
+
+.loginPage-submit-btn {
+  transition: background-color 0.3s ease;
+}

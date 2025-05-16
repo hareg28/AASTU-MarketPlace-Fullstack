@@ -14,30 +14,32 @@ import About from "../Pages/About";
 import Profile from "../Pages/Profile";
 import { Registration } from "../Pages/Registration";
 import LoginPage from "../Pages/login";
-
+import AdminDashboard from "../Pages/AdminDashboard";
 const routes = createBrowserRouter([
   {
     path: "/",
     element: (
       <CartProvider>
-      <Layout />
+        <Layout />
       </CartProvider>
     ),
     children: [
       { path: "/contacus", element: <Contactus /> },
       { path: "/", element: <HomeBuyer /> },
+      { path: "homebuyer", element: <HomeBuyer /> },
+      { path: "homesaller", element: <HomeSaller /> },
       { path: "contacus", element: <Contactus /> },
       { path: "accountsettings", element: <AccountSettings /> },
       { path: "signup", element: <Registration /> },
       { path: "login", element: <LoginPage /> },
+      { path: "admin-dashboard", element: <AdminDashboard /> },
       { path: "*", element: <Page404 /> },
       { path: "/wishlist", element: <Wishlist /> },
       { path: "/about", element: <About /> },
       { path: "/profile", element: <Profile /> },
-      {path:"cart", element: <Cart />},
-      {path:"checkout", element: <Checkout />},
-      {path:"productdetails", element: <ProductDetails />},
-
+      { path: "cart", element: <Cart /> },
+      { path: "checkout", element: <Checkout /> },
+      { path: "productdetails", element: <ProductDetails /> },
     ],
   },
 ]);
