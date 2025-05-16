@@ -44,7 +44,6 @@ const LoginPage = () => {
       }
 
       if (data.success) {
-        // Redirect based on user role
         if (data.role === "buyer") {
           navigate("/homebuyer");
         } else if (data.role === "seller") {

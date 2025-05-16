@@ -14,6 +14,7 @@ $tableName = 'registrationdata';
 function generateVerificationCode() {
     return str_pad(mt_rand(0, 999999), 6, '0', STR_PAD_LEFT);
 }
+
 require '../backend/PHPMailer-master/src/PHPMailer.php';
 require '../backend/PHPMailer-master/src/SMTP.php';
 require '../backend/PHPMailer-master/src/Exception.php';
@@ -152,13 +153,6 @@ function sendVerificationEmail($email, $code) {
     }
 }
 
-function dd($value) {
-    echo '<pre>';
-    echo var_dump($value);
-    echo '</pre>';
-    die;
-}
-
 $response = [
     'success' => false,
     'message' => '',
@@ -183,7 +177,6 @@ try {
     if (isset($_POST['verification_code'])) {
         require './db_connection.php';
 
-        // Ensure $conn is initialized
         if (!isset($conn) || $conn === null) {
             throw new Exception("Database connection not established");
         }
@@ -191,7 +184,6 @@ try {
         $email = $_POST['Email'];
         $code = $_POST['verification_code'];
         
-        // Check if code is valid and not expired
         $stmt = $conn->prepare("SELECT * FROM verification_codes WHERE email = :email AND code = :code AND expires_at > NOW()");
         $stmt->bindParam(":email", $email);
         $stmt->bindParam(":code", $code);
@@ -199,12 +191,10 @@ try {
         $result = $stmt->fetch();
         
         if ($result) {
-            // Mark user as verified
             $updateStmt = $conn->prepare("UPDATE registrationdata SET verified = true WHERE Email = :email");
             $updateStmt->bindParam(":email", $email);
             $updateStmt->execute();
             
-            // Delete the used code
             $deleteStmt = $conn->prepare("DELETE FROM verification_codes WHERE email = :email AND code = :code");
             $deleteStmt->bindParam(":email", $email);
             $deleteStmt->bindParam(":code", $code);
@@ -224,7 +214,6 @@ try {
     if (isset($_POST['resend_verification'])) {
         require './db_connection.php';
 
-        // Ensure $conn is initialized
         if (!isset($conn) || $conn === null) {
             throw new Exception("Database connection not established");
         }
@@ -233,19 +222,16 @@ try {
         $code = generateVerificationCode();
         $expiresAt = date('Y-m-d H:i:s', strtotime('+1 minute'));
         
-        // Delete any existing codes for this email
         $deleteStmt = $conn->prepare("DELETE FROM verification_codes WHERE email = :email");
         $deleteStmt->bindParam(":email", $email);
         $deleteStmt->execute();
         
-        // Insert new code
         $insertStmt = $conn->prepare("INSERT INTO verification_codes (email, code, expires_at) VALUES (:email, :code, :expires_at)");
         $insertStmt->bindParam(":email", $email);
         $insertStmt->bindParam(":code", $code);
         $insertStmt->bindParam(":expires_at", $expiresAt);
         $insertStmt->execute();
         
-        // Send email
         if (sendVerificationEmail($email, $code)) {
             $response['success'] = true;
             $response['message'] = "Verification code resent successfully!";
@@ -258,7 +244,7 @@ try {
     }
 
     // Original registration validation
-    $requiredFields = ['Id', 'Email', 'Name', 'Phone', 'Password', 'Role'];
+    $requiredFields = ['user_id', 'Email', 'Name', 'Phone', 'Password', 'Role']; // Changed 'Id' to 'user_id'
     foreach ($requiredFields as $field) {
         if (empty($_POST[$field] ?? null)) {
             $response['errors'][$field] = "This field is required";
@@ -333,14 +319,13 @@ try {
 
     require './db_connection.php';
     
-    // Ensure $conn is initialized
     if (!isset($conn) || $conn === null) {
         throw new Exception("Database connection not established");
     }
     
     // Check if user already exists
-    $checkStmt = $conn->prepare("SELECT * FROM RegistrationData WHERE Email = :email OR Id = :id");
-    $checkStmt->bindParam(":id", $_POST['Id'], PDO::PARAM_STR);
+    $checkStmt = $conn->prepare("SELECT * FROM RegistrationData WHERE Email = :email OR user_id = :user_id");
+    $checkStmt->bindParam(":user_id", $_POST['user_id'], PDO::PARAM_STR);
     $checkStmt->bindParam(":email", $_POST['Email'], PDO::PARAM_STR);
     $checkStmt->execute();
     $checkResult = $checkStmt->fetch();
@@ -353,9 +338,9 @@ try {
     $hashedPassword = password_hash($_POST['Password'], PASSWORD_DEFAULT);
 
     // Insert new user with prepared statement
-    $insertQuery = $conn->prepare("INSERT INTO $tableName (Id, Email, Name, Phone, Password, PPpath, Role, verified) VALUES (?, ?, ?, ?, ?, ?, ?, false)");
+    $insertQuery = $conn->prepare("INSERT INTO $tableName (user_id, Email, Name, Phone, Password, PPpath, Role, verified) VALUES (?, ?, ?, ?, ?, ?, ?, false)");
     $insertQuery->execute([
-        $_POST['Id'],
+        $_POST['user_id'],
         $_POST['Email'],
         $_POST['Name'],
         $_POST['Phone'],
@@ -385,8 +370,8 @@ try {
     $response['message'] = $e->getMessage();
     error_log("Registration Error: " . $e->getMessage());
 } finally {
-    if (isset($dbconn)) {
-        pg_close($dbconn);
+    if (isset($conn)) {
+        $conn = null;
     }
 }
 
