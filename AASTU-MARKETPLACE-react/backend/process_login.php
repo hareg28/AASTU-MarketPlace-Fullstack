@@ -26,7 +26,6 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 }
 
 try {
-    // Validate input
     if (empty($data['email'])) {
         throw new Exception("Email is required");
     }
@@ -35,7 +34,6 @@ try {
         throw new Exception("Password is required");
     }
 
-    // Check if user exists
     $stmt = $conn->prepare("SELECT * FROM registrationdata WHERE Email = :email");
     $stmt->bindParam(":email", $data['email']);
     $stmt->execute();
@@ -45,19 +43,17 @@ try {
         throw new Exception("User not found");
     }
 
-    // Verify password
-    if (!password_verify($data['password'], $user['Password'])) {
+    if (!password_verify($data['password'], $user['password'])) {
         throw new Exception("Invalid password");
     }
 
-    // Check if email is verified
     if (!$user['verified']) {
         throw new Exception("Please verify your email first");
     }
 
     $response['success'] = true;
     $response['message'] = "Login successful";
-    $response['role'] = $user['Role'];
+    $response['role'] = $user['role'];
 
 } catch (Exception $e) {
     $response['message'] = $e->getMessage();
