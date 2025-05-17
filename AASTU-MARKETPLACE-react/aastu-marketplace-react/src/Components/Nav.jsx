@@ -6,9 +6,11 @@ import wishlistIcon from "../Assets/Wishlist.png";
 import cartIcon from "../Assets/Cart1.png";
 import userIcon from "../Assets/user.png";
 import { Link } from "react-router-dom";
+import { useAuth } from "./AuthContext";
 
 const Nav = () => {
   const [isDropdownVisible, setIsDropdownVisible] = useState(false);
+  const { currentUser } = useAuth();
 
   const handleMouseEnter = () => {
     setIsDropdownVisible(true);
@@ -54,9 +56,16 @@ const Nav = () => {
             <li>
               <Link to="/about">About Us</Link>
             </li>
-            <li>
-              <Link to="/signup">Sign Up</Link>
-            </li>
+            {!currentUser && (
+              <li>
+                <Link to="/signup">Sign Up</Link>
+              </li>
+            )}
+            {currentUser?.role === "admin" && (
+              <li>
+                <Link to="/admin-dashboard">Admin Dashboard</Link>
+              </li>
+            )}
           </ul>
           <div className="search-container">
             <input
@@ -71,7 +80,6 @@ const Nav = () => {
           <div className="btns">
             <Link to="/wishlist">
               <img src={wishlistIcon} alt="Go to Wishlist" />
-
             </Link>
             <a href="/Cart Page/index.html">
               <Link to="/cart">

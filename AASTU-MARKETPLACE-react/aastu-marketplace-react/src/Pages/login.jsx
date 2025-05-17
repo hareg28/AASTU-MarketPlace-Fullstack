@@ -1,19 +1,66 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import loginVector from "../Assets/login_vector2.png";
 import loginIcon from "../Assets/login_icon.png";
 import "../CSS/login.css";
+
 const LoginPage = () => {
   const navigate = useNavigate();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleSignupClick = (e) => {
     e.preventDefault();
-    // Add transition effect before navigation
     document.querySelector(".loginPage-content-container").style.animation =
       "fadeOut 0.5s ease forwards";
     setTimeout(() => {
       navigate("/signup");
     }, 500);
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setIsLoading(true);
+    setError("");
+
+    try {
+      const response = await fetch("http://localhost:8000/process_login.php", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email,
+          password,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.message || "Login failed");
+      }
+
+      if (data.success) {
+        if (data.role === "buyer") {
+          navigate("/homebuyer");
+        } else if (data.role === "seller") {
+          navigate("/homeseller");
+        } else if (data.role === "admin") {
+          navigate("/admin-dashboard");
+        } else {
+          navigate("/");
+        }
+      } else {
+        setError(data.message || "Invalid credentials");
+      }
+    } catch (err) {
+      setError(err.message || "An error occurred during login");
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -41,7 +88,9 @@ const LoginPage = () => {
             </p>
           </div>
 
-          <form className="loginPage-form">
+          {error && <div className="loginPage-error-message">{error}</div>}
+
+          <form className="loginPage-form" onSubmit={handleSubmit}>
             <div className="loginPage-form-group">
               <label htmlFor="email" className="loginPage-label">
                 Email address*
@@ -52,6 +101,8 @@ const LoginPage = () => {
                 className="loginPage-input"
                 placeholder="Enter your AASTU email"
                 required
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
               />
             </div>
 
@@ -65,13 +116,15 @@ const LoginPage = () => {
                 className="loginPage-input"
                 placeholder="Enter your password"
                 required
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
               />
               <a href="/forgot-password" className="loginPage-forgot-password">
                 Forgot password?
               </a>
             </div>
 
-            <div className="loginPage-remember-me">
+            {/* <div className="loginPage-remember-me">
               <input
                 type="checkbox"
                 id="remember"
@@ -80,10 +133,14 @@ const LoginPage = () => {
               <label htmlFor="remember" className="loginPage-remember-label">
                 Remember me
               </label>
-            </div>
+            </div> */}
 
-            <button type="submit" className="loginPage-submit-btn">
-              Sign in
+            <button
+              type="submit"
+              className="loginPage-submit-btn"
+              disabled={isLoading}
+            >
+              {isLoading ? "Signing in..." : "Sign in"}
             </button>
           </form>
 

@@ -8,7 +8,7 @@ import { FiUpload, FiX, FiRefreshCw } from "react-icons/fi";
 export const Registration = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
-    Id: "",
+    user_id: "", // Changed from Id to user_id
     Email: "",
     Name: "",
     Phone: "",
@@ -75,6 +75,11 @@ export const Registration = () => {
           !/[0-9]/.test(value)
         ) {
           error = "Must contain uppercase, lowercase, and numbers";
+        }
+        break;
+      case "user_id":
+        if (!value) {
+          error = "ID number is required";
         }
         break;
       default:
@@ -355,19 +360,19 @@ export const Registration = () => {
             >
               <div className="form-row">
                 <div className="form-group">
-                  <label htmlFor="Id">ID Number*</label>
+                  <label htmlFor="user_id">ID Number*</label>
                   <input
                     type="text"
-                    id="Id"
-                    name="Id"
+                    id="user_id"
+                    name="user_id"
                     placeholder="AASTU ID"
-                    value={formData.Id}
+                    value={formData.user_id}
                     onChange={handleChange}
                     required
-                    className={errors.Id ? "error" : ""}
+                    className={errors.user_id ? "error" : ""}
                   />
-                  {errors.Id && (
-                    <span className="error-message">{errors.Id}</span>
+                  {errors.user_id && (
+                    <span className="error-message">{errors.user_id}</span>
                   )}
                 </div>
               </div>
