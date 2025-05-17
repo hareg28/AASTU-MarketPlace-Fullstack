@@ -7,7 +7,7 @@ import ItemSales from "../Components/home/item";
 import PostModal from "../Components/home/Post";
 import "..//CSS/Post.css";
 
-const Home = () => {
+const HomeSaller = () => {
   const [showModal, setShowModal] = useState(false);
 
   return (
@@ -47,4 +47,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default HomeSaller;

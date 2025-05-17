@@ -8,15 +8,20 @@ const ItemSales = () => {
 
   useEffect(() => {
     const fetchItems = async () => {
-      const { data, error } = await supabase
-        .from("itemdetail")
-        .select("*")
-        .order("itemId", { ascending: false });
+      try {
+        const response = await fetch(
+          "http://localhost/AASTU-MarketPlace-Fullstack/AASTU-MARKETPLACE-react/backend/items.php"
+        );
 
-      if (error) {
-        console.error("Fetch error:", error);
-      } else {
-        setItems(data);
+        const data = await response.json();
+
+        if (response.ok) {
+          setItems(data);
+        } else {
+          console.error("Failed to fetch items:", data.error);
+        }
+      } catch (error) {
+        console.error("Network error:", error);
       }
     };
 
@@ -26,7 +31,7 @@ const ItemSales = () => {
   return (
     <section className="item-sales">
       {items.map((item) => (
-        <div className="item-card" key={item.itemId}>
+        <div className="item-card" key={item.itemid}>
           <div className="item-upper">
             <div className="item-image">
               <div className="icons">
@@ -39,7 +44,7 @@ const ItemSales = () => {
               </div>
               <img
                 className="item-img"
-                src={`http://localhost/aastu-marketplace/uploads/${item.itemProfile}`}
+                src={item.itemprofile} // Directly use full URL from backend
                 alt="product"
               />
             </div>
@@ -48,11 +53,11 @@ const ItemSales = () => {
             <img src={profile} alt="customer-profile" width={50} height={50} />
             <div className="customer-profile">
               <div className="profile">
-                <h5>{item.itemName}</h5>
+                <h5>{item.itemname}</h5>
                 <p>AASTU Electronics</p>
-                <div className="rating">{item.itemRate}</div>
+                <div className="rating">{item.itemrate}</div>
               </div>
-              <p>{item.itemPrice} ETB</p>
+              <p>{item.itemprice} ETB</p>
             </div>
           </div>
         </div>

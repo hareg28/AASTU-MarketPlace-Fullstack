@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { supabase } from "../../supabaseClient"; // adjust path if needed
 
 const PostModal = () => {
   const [itemName, setItemName] = useState("");
@@ -12,47 +11,36 @@ const PostModal = () => {
     e.preventDefault();
     if (!itemImage) return alert("Choose an image");
 
+    const formData = new FormData();
+    formData.append("itemName", itemName);
+    formData.append("itemDescription", itemDescription);
+    formData.append("itemPrice", itemPrice);
+    formData.append("image", itemImage);
+
     try {
       setLoading(true);
-
-      /* ---------- 1️⃣  upload image to Supabase Storage ---------- */
-      const fileExt = itemImage.name.split(".").pop();
-      const fileName = `${Date.now()}_${itemName}.${fileExt}`;
-      const filePath = `public/${fileName}`;
-
-      const { error: uploadErr } = await supabase.storage
-        .from("uploads")
-        .upload(filePath, itemImage);
-
-      if (uploadErr) throw uploadErr;
-
-      /* ---------- 2️⃣  get the public URL of that image ---------- */
-      const { data } = supabase.storage.from("uploads").getPublicUrl(filePath);
-
-      const imageUrl = data.publicUrl;
-
-      /* ---------- 3️⃣  insert row into itemdetail table ---------- */
-      const { error: insertErr } = await supabase.from("itemdetail").insert([
+      const response = await fetch(
+        "http://localhost/AASTU-MarketPlace-Fullstack/AASTU-MARKETPLACE-react/backend/items.php",
         {
-          itemName,
-          itemDescription,
-          itemPrice: parseFloat(itemPrice),
-          itemRate: 0,
-          itemProfile: imageUrl,
-        },
-      ]);
+          method: "POST",
+          body: formData,
+        }
+      );
 
-      if (insertErr) throw insertErr;
+      const result = await response.json();
 
-      alert("Item uploaded successfully ✅");
-      // clear form
-      setItemName("");
-      setItemDescription("");
-      setItemPrice("");
-      setItemImage(null);
+      if (response.ok) {
+        alert("Item uploaded successfully ✅");
+        setItemName("");
+        setItemDescription("");
+        setItemPrice("");
+        setItemImage(null);
+      } else {
+        alert(`Upload failed: ${result.error || "Unknown error"}`);
+      }
     } catch (err) {
-      console.error("Upload error:", err.message);
-      alert(`Upload failed: ${err.message}`);
+      console.error("Upload error:", err);
+      alert("Upload failed. See console for details.");
     } finally {
       setLoading(false);
     }
@@ -88,7 +76,7 @@ const PostModal = () => {
         required
       />
 
-      <button type="submit" className="upload-btn" disabled={loading}>
+      <button type="submit" disabled={loading}>
         {loading ? "Posting…" : "Post Item"}
       </button>
     </form>
